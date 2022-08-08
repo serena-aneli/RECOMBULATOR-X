@@ -3,7 +3,7 @@ sort: 1
 permalink: /installation
 ---
 
-# :wrench: Installation
+# Installation
 
 You can install RECOMBULATOR-X via **pip**
 
