@@ -12,7 +12,7 @@ RECOMBULATOR-X is a *Python module* and a *command line tool* for computing the 
 <br/>
 <br/>
 :octocat: [GitHub site](https://github.com/serena-aneli/RECOMBULATOR-X)
-
+:open_book: [Documentation](https://serena-aneli.github.io/RECOMBULATOR-X/)
 :page_facing_up: Please cite [Paper]()
 
 <br/>
@@ -32,7 +32,8 @@ We designed RECOMBULATOR-X to solve some issues in the computation of recombinat
 * bla
 
 
-For coverage analysis of large datasets it can be useful to consider Mosdepth, that uses indexed BAM/CRAM files as input. Another interesting alternative is Megadepth, a fast and memory efficient tool.
+# :open_book: Documentation
+Full documentation is available online at the :open_book: [dedicated website](https://serena-aneli.github.io/RECOMBULATOR-X/), or in this repository under ```docs```.
 
 
 ## Installation
