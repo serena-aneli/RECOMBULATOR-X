@@ -22,6 +22,18 @@ RECOMBULATOR-X is a *Python module* and a *command line tool* for computing the 
 
 ---
 
+The program is written in Python (3.6) and can be used as a Python module or a command-line tool. 
+
+We designed RECOMBULATOR-X to solve some issues in the computation of recombination rates for X-chromosomal markers in forensics:
+
+* something
+* bla
+* bla
+* bla
+
+
+For coverage analysis of large datasets it can be useful to consider Mosdepth, that uses indexed BAM/CRAM files as input. Another interesting alternative is Megadepth, a fast and memory efficient tool.
+
 
 ## Installation
 
