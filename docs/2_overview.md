@@ -18,3 +18,11 @@ Recombination between X-chromosomal markers only happens in female meiosis. This
 We developed RECOMBULATOR-X to overcome this issue. Built upon the same statistical framework of the previous work (Nothnagel et al., 2012), RECOMBULATOR-X uses a new computational strategy to infer recombination rates for X-STRs, while taking also the probability of mutation into account. 
 
 *more on the new computational strategy*
+
+---
+
+### Features
+
+- *Inference of recombination rate faster for many markers*
+- Mutation rates can estimated for each marker separately or as a unique parameter 
+- Simulation of pedigrees typed with STRs
