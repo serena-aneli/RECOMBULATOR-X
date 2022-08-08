@@ -11,7 +11,7 @@ RECOMBULATOR-X is a *Python module* and a *command line tool* for computing the 
 <br/>
 <br/>
 <br/>
-:octocat: [GitHub site](https://github.com/bioserenina/Xchr_recombulator/)
+:octocat: [GitHub site](https://github.com/serena-aneli/RECOMBULATOR-X)
 
 :page_facing_up: Please cite [Paper]()
 
