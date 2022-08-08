@@ -22,7 +22,6 @@ RECOMBULATOR-X is a *Python module* and a *command line tool* for computing the 
 <br/>
 <br/>
 
----
 
 The program is written in Python (3.6) and can be used as a Python module or a command-line tool. 
 
@@ -33,12 +32,10 @@ We designed RECOMBULATOR-X to solve some issues in the computation of recombinat
 * bla
 * bla
 
----
 
 ## :open_book: Documentation
 Full documentation is available online at the :open_book: [dedicated website](https://serena-aneli.github.io/RECOMBULATOR-X/), or in this repository under ```docs```.
 
----
 
 ## Installation
 
@@ -48,7 +45,6 @@ You can install RECOMBULATOR-X via **pip**
 pip install RECOMBULATOR-X
 ```
 
----
 
 ## Overview
 
@@ -62,23 +58,17 @@ The main statistical approach for the estimation of recombination rates from ped
 
 We developed RECOMBULATOR-X to overcome this issue. Built upon the same statistical framework of the previous work (Nothnagel et al., 2012), RECOMBULATOR-X uses a new computational strategy to infer recombination rates for X-STRs, while taking also the probability of mutation into account. 
 
----
-
 ## Features
 
 - *Inference of recombination rate faster for many markers*
 - Mutation rates can estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
 
----
-
 ## Benchmark
 
 - *Inference of recombination rate faster for many markers*
 - Mutation rates can estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
-
----
 
 ## Usage
 
