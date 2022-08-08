@@ -1,7 +1,7 @@
 # RECOMBULATOR-X
 
 <p align="center">
-  <img align="left" width="350" height="350" src="docs/assets/images/LOGO.png">
+  <img align="left" width="350" height="350" src="assets/images/LOGO.png">
 </p>
 <br/>
 <br/>
