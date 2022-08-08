@@ -59,6 +59,8 @@ We developed RECOMBULATOR-X to overcome this issue. Built upon the same statisti
 
 ---
 
+## Usage
+
 ### File formats
 
 RECOMBULATOR-X uses the PED files based on [PLINK](https://www.cog-genomics.org/plink/) pedigree files as input. The PED file format stores sample pedigree information (i.e., the familial relationships between samples) and the genotypes.
@@ -71,7 +73,8 @@ In particular, the first 6 mandatory columns contain:
 * Sex
 * Phenotype
 
-The "Sex" field may be coded as: 1=male/2=female; XY=male/XX=female; M=male/F=female; MALE=male/FEMALE=female
+The "Sex" field may be coded as: 1=male/2=female; XY=male/XX=female; M=male/F=female; MALE=male/FEMALE=female. If you are using STR markers, you can store within this column the Amelogenin marker. 
+
 The "Phenotype" field refers to the use of PED files in medical research. In non-medical application, it may be -9 which means "unknown".  ATTENZIONE PERCHE' NELLA TABELLA E' -1
         
 From the 7th column on, there are the markers genotypes (two columns for a genetic marker, each of the two storing an allele). In case of STRs, the columns contain  numbers, which correspond to the STR repeats or "0" when missing. 
@@ -92,7 +95,6 @@ Here is a family (each row is an individual):
 
 ---
 
-## Usage
 
 - pacchetto python
 - tool linea di comando
