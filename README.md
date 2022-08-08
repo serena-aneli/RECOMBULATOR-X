@@ -37,7 +37,7 @@ We designed RECOMBULATOR-X to solve some issues in the computation of recombinat
 Full documentation is available online at the :open_book: [dedicated website](https://serena-aneli.github.io/RECOMBULATOR-X/), or in this repository under ```docs```.
 
 
-## Installation
+## :wrench: Installation
 
 You can install RECOMBULATOR-X via **pip**
 
@@ -46,7 +46,7 @@ pip install RECOMBULATOR-X
 ```
 
 
-## Overview
+## :mortar_board: Overview
 
 STRs located on the X chromosome are a valuable resource for solving complex kinship cases in forensic genetics thanks to their peculiar inheritance mode. At the same time, the usage of multiple markers linked along the same chromsome, while increasing the evidential weight, also requires proper consideration of the recombination rates between markers in the biostatistical evaluation of kinship.
 
@@ -58,19 +58,19 @@ The main statistical approach for the estimation of recombination rates from ped
 
 We developed RECOMBULATOR-X to overcome this issue. Built upon the same statistical framework of the previous work (Nothnagel et al., 2012), RECOMBULATOR-X uses a new computational strategy to infer recombination rates for X-STRs, while taking also the probability of mutation into account. 
 
-## Features
+## :boom: Features
 
 - *Inference of recombination rate faster for many markers*
 - Mutation rates can estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
 
-## Benchmark
+## :rocket: Benchmark
 
 - *Inference of recombination rate faster for many markers*
 - Mutation rates can estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
 
-## Usage
+## :computer: Usage
 
 RECOMBULATOR-X uses the PED files based on [PLINK](https://www.cog-genomics.org/plink/) pedigree files as input. The PED file format stores sample pedigree information (i.e., the familial relationships between samples) and the genotypes. More information on the input file can be found in this repository under ```docs/3_usage.md```.
 
