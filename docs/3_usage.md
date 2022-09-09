@@ -1,6 +1,6 @@
 ---
-sort: 2
-permalink: /overview
+sort: 3
+permalink: /usage
 ---
 
 # Usage
