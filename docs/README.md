@@ -68,7 +68,7 @@ We developed RECOMBULATOR-X to overcome this issue. Built upon the same statisti
 
 ## :computer: Usage
 
-RECOMBULATOR-X uses the PED files based on [PLINK](https://www.cog-genomics.org/plink/) pedigree files as input. The PED file format stores sample pedigree information (i.e., the familial relationships between samples) and the genotypes. More information on the input file can be found within the Usage section of this documentation or in GitHub under ```docs/3_usage.md```.
+RECOMBULATOR-X uses the PED files based on [PLINK](https://www.cog-genomics.org/plink/) pedigree files as input. The PED file format stores sample pedigree information (i.e., the familial relationships between samples) and the genotypes. More information on the input file can be found within the [a relative link](3_usage.md) section of this documentation or in GitHub under ```docs/3_usage.md```.
 
 - pacchetto python
 - tool linea di comando
