@@ -23,7 +23,7 @@ The "Phenotype" field refers to the use of PED files in medical research. In non
         
 From the 7th column on, there are the markers genotypes (two columns for a genetic marker, each of the two storing an allele). In case of STRs, the columns contain  numbers, which correspond to the STR repeats or "0" when missing. 
 
-:warning: Genetic markers (from the 7th column on) must be provided according to their physical genomic position. Indeed, the algorithm will infer the recombination rate between A1 and A2, A2 and A3 and so on. 
+:warning: **Genetic markers (from the 7th column on) must be provided according to their physical genomic position. Indeed, the algorithm will infer the recombination rate between A1 and A2, A2 and A3 and so on.** 
 
 ### Example
 
