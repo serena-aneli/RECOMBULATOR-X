@@ -10,7 +10,6 @@ RECOMBULATOR-X is a *Python module* and a *command line tool* for computing the 
 <br/>
 <br/>
 <br/>
-<br/>
 
 :octocat: [GitHub](https://github.com/serena-aneli/RECOMBULATOR-X)
 
@@ -20,9 +19,6 @@ RECOMBULATOR-X is a *Python module* and a *command line tool* for computing the 
 
 <br/>
 <br/>
-<br/>
-<br/>
-
 
 The program is written in Python (3.6) and can be used as a Python module or a command-line tool. 
 
@@ -70,5 +66,5 @@ We developed RECOMBULATOR-X to overcome this issue. Built upon the same statisti
 
 RECOMBULATOR-X uses the PED files based on [PLINK](https://www.cog-genomics.org/plink/) pedigree files as input. The PED file format stores sample pedigree information (i.e., the familial relationships between samples) and the genotypes. More information on the input file can be found within the [Usage](3_usage.md) section of this documentation or in GitHub under ```docs/3_usage.md```.
 
-- pacchetto python
-- tool linea di comando
+The program can be used both as a Python module or a command-line tool. A detailed notebook for the Python module can be found [here]. 
+
