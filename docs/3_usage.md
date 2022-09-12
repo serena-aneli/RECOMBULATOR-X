@@ -41,8 +41,18 @@ Here is a family (each row is an individual):
 
 ---
 
+## Python module
 
 - pacchetto python
+
+## Command line tool
+
 - tool linea di comando
+
+## File formats
+
+Recombination and mutation rates are returned in a tabular format. In particual, the recombination rates are computed between markers following the order in which they were provided in the PED file. 
+
+### Example
 
 
