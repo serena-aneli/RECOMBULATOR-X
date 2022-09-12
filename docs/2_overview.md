@@ -26,3 +26,10 @@ We developed RECOMBULATOR-X to overcome this issue. Built upon the same statisti
 - *Inference of recombination rate faster for many markers*
 - Mutation rates can estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
+
+## Assumptions
+
+- males must be haploid for all the markers
+- markers must be short tandem repeats (STR) or biallelic
+- unit mutations: STR fractionary mutations are not allowed and mutation of more than one repeat are assumed to have zero probability
+
