@@ -43,7 +43,9 @@ Here is a family (each row is an individual):
 
 ## Tools
 
-lista delle cose che fa con i link in un'altra pagina
+The initial steps of RECOMBULATOR-X consist in reading the PED file and identifying the informative families for the estimation of recombination rates using the function [`ped2graph`](LINK). 
+
+CONTINUARE QUI
 
 ## Python module
 
@@ -71,13 +73,13 @@ where, the first array (n-1 long) stores the recombination rates, while the seco
 The basic usage of the RECOMBULATOR-X command line interface consists in estimating just recombination rate and using the default single value for mutation rate (0.001).
 
 ```Bash
-xstr_recomb ped_path
+ECOMBULATOR-X ped_path
 ``` 
 
 Alternatively, one may also decide to estimate mutation rates. In particular, adding \emph{--estimate-mutation-rates all}, the tool will compute a mutation value for each marker. 
 
 ```Bash
-xstr_recomb ped_path --estimate-mutation-rates all
+ECOMBULATOR-X ped_path --estimate-mutation-rates all
 ```
 
 The output of RECOMBULATOR-X command line interface is returned in a tabular format according to the options *no*, *one*, *all* for the parameter `--estimate-mutation-rates`. In particual, the recombination rates are computed between markers following the order in which they were provided in the PED file.
