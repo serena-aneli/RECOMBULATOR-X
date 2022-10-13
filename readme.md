@@ -28,7 +28,7 @@ The program is written in Python (3.6) and can be used as a Python module or a c
 
 We designed RECOMBULATOR-X to solve some issues in the computation of recombination rates for X-chromosomal markers in forensics:
 
-* something
+* current methods from pedigrees proved to be unsuitable when more than 15 STR markers are considered
 * bla
 * bla
 * bla
@@ -61,13 +61,13 @@ We developed RECOMBULATOR-X to overcome this issue. Built upon the same statisti
 
 ## :boom: Features
 
-- *Inference of recombination rate faster for many markers*
+- Inference of recombination rate faster for many markers
 - Mutation rates can estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
 
 ## :rocket: Benchmark
 
-- *Inference of recombination rate faster for many markers*
+- Inference of recombination rate faster for many markers
 - Mutation rates can estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
 
