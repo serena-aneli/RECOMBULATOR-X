@@ -17,7 +17,12 @@ Recombination between X-chromosomal markers only happens in female meiosis. This
 
 We developed RECOMBULATOR-X to overcome this issue. Built upon the same statistical framework of the previous work (Nothnagel et al., 2012), RECOMBULATOR-X uses a new computational strategy to infer recombination rates for X-STRs, while taking also the probability of mutation into account. 
 
-*more on the new computational strategy*
+DESCRIVERE QUI LA STRATEGIA COMPUTAZIONALE (MODI DIVERSI PER IL CALCOLO DELLA LIKELIHOOD, COSA FA DOPO ECC)
+
+At this point, the tool will count how many informative type I and type II families. For recombination, informative subfamilies are either those with:
+
+- a phased mother and at least one son or phased daughter, called type I families
+- an unphased mother and at least two between sons and phased daughters, called type II families
 
 ---
 
