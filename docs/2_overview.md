@@ -26,7 +26,6 @@ In detail, RECOMBULATOR-X performs the following steps to infer recombination an
 - multiplication of the likelihoods of all families in order to obtain the likelihood of the entire dataset;
 - actually, we are not so interested in the likelihoods themselves, but in their parameters, which are the recombination and mutation rates. Hence, using EM, RECOMBULATOR-X finds the parameters maximizing the overall likelihood.
 
----
 
 ## Features
 
