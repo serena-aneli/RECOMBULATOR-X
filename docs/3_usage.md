@@ -45,25 +45,31 @@ Here is a family (each row is an individual):
 
 FORSE NON SERVE UNA SEZIONE TOOLS
 
-## Python module
+## Python module and workflow
 
-The Jupyter Notebook Estimation Example.ipynb in GitHub reports a detailed guide for the Python module usage. 
-The initial steps of the Python module RECOMBULATOR-X consist in reading the PED file and identifying the informative families for the estimation of recombination rates using the function [`ped2graph`](LINK). The function [`plot_family_graph`](LINK) can then be used to graphically represent the reported relationships between individuals within the same family. 
+A detailed guide for the Python module usage can be found in the Jupyter Notebook [Estimation Example.ipynb](LINK) on GitHub.
 
-```Pyhton
+The initial steps of the Python module RECOMBULATOR-X consist in reading the PED file and identifying the informative families for the estimation of recombination rates using the function [`ped2graph`](LINK). For recombination, informative subfamilies are either those with:
+
+- a phased mother and at least one son or phased daughter, called type I families
+- an unphased mother and at least two between sons and phased daughters, called type II families
+
+The function [`plot_family_graph`](LINK) can then be used to graphically represent the reported relationships between individuals within the same family. 
+
+```Python
 family_graphs, marker_names = xstr_recomb.ped2graph(ped_path)
 xstr_recomb.families.plot_family_graph(family_graphs[0][1]) 
 ```
 
 AGGIUNGERE FUNZIONE preprocess_families
 
-```Pyhton
+```Python
 processed_families = xstr_recomb.preprocess_families(family_graphs)
 ```
 
 The estimation of recombination and mutation rates can be launched with the following line:
 
-```Pyhton
+```Python
 est_recomb_rates, est_mut_rates = estimate_rates(processed_families, 0.1, 0.1, estimate_mutation_rates='all')
 ```
 
