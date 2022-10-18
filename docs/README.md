@@ -58,7 +58,7 @@ We developed RECOMBULATOR-X to overcome this issue. Built upon the same statisti
 
 ## :rocket: Benchmark
 
-- *Inference of recombination rate faster for many markers*
+- DIRE QUI CHE FUNZIONA PER FAMIGLIE DI TIPO I E NON II? far exceed the computational speed of the previous approach at least for type I families NEL BENCHMARK
 - Mutation rates can estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
 
