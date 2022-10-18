@@ -15,9 +15,9 @@ pip install RECOMBULATOR-X
 
 RECOMBULATOR-X needs the following Python modules and versions: 
 
-- numpy>=1.14
-- pandas>=0.23
-- scipy>=1.0
-- networkx>=2.0. 
+- [numpy](https://numpy.org/)>=1.14
+- [pandas](https://pandas.pydata.org/)>=0.23
+- [scipy](https://scipy.org/)>=1.0
+- [networkx](https://networkx.org/)>=2.0. 
 
-Notably, it is not mandatory to have Numba installed: if Numba it is not installed, just the implementations which do not use Numba will be available. 
+Notably, it is not mandatory to have Numba installed: if [`Numba`](https://numba.pydata.org/) it is not installed, just the implementations which do not use Numba will be available. 
