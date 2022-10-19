@@ -54,6 +54,8 @@ The initial steps of the Python module RECOMBULATOR-X consist in reading the PED
 - a phased mother and at least one son or phased daughter, called type I families
 - an unphased mother and at least two between sons and phased daughters, called type II families
 
+Notably, females can be phased when their father is available: in this way, they will be virtually transformed into males, thus being allowed to take part to informative families.
+ 
 The function [`plot_family_graph`](LINK) can then be used to graphically represent the reported relationships between individuals within the same family. 
 
 ```Python
@@ -61,7 +63,7 @@ family_graphs, marker_names = xstr_recomb.ped2graph(ped_path)
 xstr_recomb.families.plot_family_graph(family_graphs[0][1]) 
 ```
 
-AGGIUNGERE FUNZIONE preprocess_families
+The fuction [`preprocess_families`](LINK) will then check the consistency of each family graph and raise errors whenever necessary. For instance, an error is raised when more than two parents or same-sex parents are present in the same family. Unconnected individuals are also flagged.
 
 ```Python
 processed_families = xstr_recomb.preprocess_families(family_graphs)
@@ -118,7 +120,55 @@ RECOMBULATOR-X ped_path --estimate-mutation-rates all
 
 ## Output 
 
-The output of RECOMBULATOR-X command line interface is returned in a tabular format according to the options *no*, *one*, *all* for the parameter `--estimate-mutation-rates`. In particual, the recombination rates are computed between markers following the order in which they were provided in the PED file.
+The output of RECOMBULATOR-X command line interface is returned in a tabular format according to the options *no*, *one*, *all* for the parameter `--estimate-mutation-rates`. In particuar, the recombination rates are computed between markers following the order in which they were provided in the PED file.
+
+<table>
+<tr><th> Table 1 Heading 1 </th><th>Table 1 Heading 2 </th><th> Table 1 Heading 2</th></tr>
+<tr><td>
+
+| TYPE          | MARKER | RATE   |
+|---------------|--------|--------|
+| RECOMBINATION | M1-M2  | 0.0362 |
+| RECOMBINATION | M2-M3  | 0.3309 |
+| RECOMBINATION | M3-M4  | 0.0656 |
+| RECOMBINATION | M4-M5  | 0.1683 |
+| RECOMBINATION | M5-M6  | 0.0138 |
+
+</td><td>
+
+| TYPE          | MARKER | RATE   |
+|---------------|--------|--------|
+| MUTATION      | *      | 0.0253 |
+| RECOMBINATION | M1-M2  | 0.0323 |
+| RECOMBINATION | M2-M3  | 0.3191 |
+| RECOMBINATION | M3-M4  | 0.0407 |
+| RECOMBINATION | M4-M5  | 0.1634 |
+| RECOMBINATION | M5-M6  | 0.0091 |
+ 
+</td><td>
+        
+
+| TYPE          | MARKER | RATE   |
+|---------------|--------|--------|
+| MUTATION      | M1     | 1e-08  |
+| MUTATION      | M2     | 1e-08  |
+| MUTATION      | M3     | 0.1420 |
+| MUTATION      | M4     | 0.0191 |
+| MUTATION      | M5     | 1e-08  |
+| MUTATION      | M6     | 1e-08  |
+| RECOMBINATION | M1-M2  | 0.0366 |
+| RECOMBINATION | M2-M3  | 0.3148 |
+| RECOMBINATION | M3-M4  | 0.0214 |
+| RECOMBINATION | M4-M5  | 0.1605 |
+| RECOMBINATION | M5-M6  | 0.0141 |        
+</td></tr> </table>
+
+
+
+
+
+
+
 
 AGGIUNGERE TABELLE OUTPUT
 
