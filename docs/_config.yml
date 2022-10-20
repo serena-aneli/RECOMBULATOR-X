@@ -1,5 +1,5 @@
 remote_theme: rundocs/jekyll-rtd-theme
-markdown: kramdown
+markdown: GFM
 #theme: jekyll-theme-leap-day
 
 plugins:
