@@ -127,8 +127,7 @@ The output of RECOMBULATOR-X command line interface is returned in a tabular for
         
 <tr><td><table></table>
 
-| TYPE          | MARKER | RATE   |
-        
+| TYPE          | MARKER | RATE   |       
 |---------------|--------|--------|
 | RECOMBINATION | M1-M2  | 0.0362 |
 | RECOMBINATION | M2-M3  | 0.3309 |
@@ -138,8 +137,7 @@ The output of RECOMBULATOR-X command line interface is returned in a tabular for
 
 </td><td>
 
-| TYPE          | MARKER | RATE   |
-        
+| TYPE          | MARKER | RATE   |       
 |---------------|--------|--------|
 | MUTATION      | *      | 0.0253 |
 | RECOMBINATION | M1-M2  | 0.0323 |
@@ -151,8 +149,7 @@ The output of RECOMBULATOR-X command line interface is returned in a tabular for
 </td><td>
         
 
-| TYPE          | MARKER | RATE   |
-        
+| TYPE          | MARKER | RATE   |        
 |---------------|--------|--------|
 | MUTATION      | M1     | 1e-08  |
 | MUTATION      | M2     | 1e-08  |
