@@ -123,7 +123,7 @@ RECOMBULATOR-X ped_path --estimate-mutation-rates all
 The output of RECOMBULATOR-X command line interface is returned in a tabular format according to the options *no*, *one*, *all* for the parameter `--estimate-mutation-rates`. In particuar, the recombination rates are computed between markers following the order in which they were provided in the PED file.
 
 <table>
-<tr><th> Table 1 Heading 1 </th><th>Table 1 Heading 2 </th><th> Table 1 Heading 2</th></tr>
+<tr><th> ` </th><th> `one` </th><th> `all` </th></tr>
 <tr><td><table></table>
 
 | TYPE          | MARKER | RATE   |
@@ -164,13 +164,6 @@ The output of RECOMBULATOR-X command line interface is returned in a tabular for
 </td></tr> </table>
 
 
-
-
-
-
-
-
-AGGIUNGERE TABELLE OUTPUT
 
 AGGIUNGERE LINK ALLE FUNZIONI
 
