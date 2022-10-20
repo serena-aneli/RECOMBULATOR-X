@@ -124,7 +124,7 @@ The output of RECOMBULATOR-X command line interface is returned in a tabular for
 
 <table>
 <tr><th> Table 1 Heading 1 </th><th>Table 1 Heading 2 </th><th> Table 1 Heading 2</th></tr>
-<tr><td>
+<tr><td><table></table>
 
 | TYPE          | MARKER | RATE   |
 |---------------|--------|--------|
