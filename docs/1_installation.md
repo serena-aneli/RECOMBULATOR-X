@@ -5,7 +5,7 @@ permalink: /installation
 
 # Installation
 
-You can install RECOMBULATOR-X via **pip**
+You can install RECOMBULATOR-X via the **pip** command from the standard PyPI repository:
 
 ```bash
 pip install RECOMBULATOR-X
