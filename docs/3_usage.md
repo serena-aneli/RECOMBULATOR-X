@@ -7,7 +7,7 @@ permalink: /usage
 
 ## File formats
 
-RECOMBULATOR-X uses the PED files based on [PLINK](https://www.cog-genomics.org/plink/) pedigree files as input. The PED file format stores sample pedigree information (i.e., the familial relationships between samples) and the genotypes.
+recombulator-x uses the PED files based on [PLINK](https://www.cog-genomics.org/plink/) pedigree files as input. The PED file format stores sample pedigree information (i.e., the familial relationships between samples) and the genotypes.
 In particular, the first 6 mandatory columns contain: 
 
 * Family ID
@@ -45,7 +45,7 @@ Here is a family (each row is an individual):
 
 A detailed guide for the Python module usage can be found in the Jupyter Notebook [Estimation Example.ipynb](LINK) on GitHub.
 
-The initial steps of the Python module RECOMBULATOR-X consist in reading the PED file and identifying the informative families for the estimation of recombination rates using the function [`ped2graph`](LINK). For recombination, informative subfamilies are either those with:
+The initial steps of the Python module recombulator-x consist in reading the PED file and identifying the informative families for the estimation of recombination rates using the function [`ped2graph`](LINK). For recombination, informative subfamilies are either those with:
 
 - a phased mother and at least one son or phased daughter, called type I families
 - an unphased mother and at least two between sons and phased daughters, called type II families
@@ -84,10 +84,10 @@ where, the first array (n-1 long) stores the recombination rates, while the seco
 
 ## Command line tool
 
-The command line interface of RECOMBULATOR-X takes as input the PED file and returns recombination and mutation rates.  
+The command line interface of recombulator-x takes as input the PED file and returns recombination and mutation rates.  
 
 ```text
-RECOMBULATOR-X 1.0.0
+recombulator-x 1.0.0
 
 usage: cli.py [-h] [--mutation-rates MUT-RATE [MUT-RATE ...]] [--estimate-mutation-rates {no,one,all}] PED
 
@@ -105,18 +105,18 @@ optional arguments:
 Its basic usage consists in estimating just recombination rate and using the default single value for mutation rate (0.001).
 
 ```Bash
-RECOMBULATOR-X ped_path
+recombulator-x ped_path
 ``` 
 
 Alternatively, one may also decide to estimate mutation rates. In particular, adding `--estimate-mutation-rates all`, the tool will compute a mutation value for each marker. 
 
 ```Bash
-RECOMBULATOR-X ped_path --estimate-mutation-rates all
+recombulator-x ped_path --estimate-mutation-rates all
 ```
 
 ## Output 
 
-The output of RECOMBULATOR-X command line interface is returned in a tabular format according to the options *no*, *one*, *all* for the parameter `--estimate-mutation-rates` (Tables 1-3). In particular, the recombination rates are computed between markers following the order in which they were provided in the PED file.
+The output of recombulator-x command line interface is returned in a tabular format according to the options *no*, *one*, *all* for the parameter `--estimate-mutation-rates` (Tables 1-3). In particular, the recombination rates are computed between markers following the order in which they were provided in the PED file.
 
 
 | TYPE          | MARKER | RATE   |       
@@ -127,7 +127,7 @@ The output of RECOMBULATOR-X command line interface is returned in a tabular for
 | RECOMBINATION | M4-M5  | 0.1683 |
 | RECOMBINATION | M5-M6  | 0.0138 |
 
-Table 1: RECOMBULATOR-X output when `--estimate-mutation-rates no` is used.
+Table 1: recombulator-x output when `--estimate-mutation-rates no` is used.
 
 
 | TYPE          | MARKER | RATE   |       
@@ -139,7 +139,7 @@ Table 1: RECOMBULATOR-X output when `--estimate-mutation-rates no` is used.
 | RECOMBINATION | M4-M5  | 0.1634 |
 | RECOMBINATION | M5-M6  | 0.0091 |
  
-Table 2: RECOMBULATOR-X output when `--estimate-mutation-rates one` is used.
+Table 2: recombulator-x output when `--estimate-mutation-rates one` is used.
         
 
 | TYPE          | MARKER | RATE   |        
@@ -156,7 +156,7 @@ Table 2: RECOMBULATOR-X output when `--estimate-mutation-rates one` is used.
 | RECOMBINATION | M4-M5  | 0.1605 |
 | RECOMBINATION | M5-M6  | 0.0141 |
         
-Table 3: RECOMBULATOR-X output when `--estimate-mutation-rates all` is used.
+Table 3: recombulator-x output when `--estimate-mutation-rates all` is used.
 
 
 
