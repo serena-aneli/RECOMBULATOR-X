@@ -5,15 +5,15 @@ permalink: /installation
 
 # Installation
 
-You can install RECOMBULATOR-X via the **pip** command from the standard PyPI repository:
+You can install recombulator-x via the **pip** command from the standard PyPI repository:
 
 ```bash
-pip install RECOMBULATOR-X
+pip install recombulator-x
 ```
 
 # Software dependencies
 
-RECOMBULATOR-X needs the following Python modules and versions: 
+recombulator-x needs the following Python modules and versions: 
 
 - [numpy](https://numpy.org/)>=1.14
 - [pandas](https://pandas.pydata.org/)>=0.23
