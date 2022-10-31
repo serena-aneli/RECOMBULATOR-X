@@ -18,7 +18,7 @@ recombulator-x is a Python module and command line tool for computing the recomb
 <br/>
 <br/>
 
-recombulator-x is written in Python (3.6) and can be used either as a module or as a command-line tool. 
+recombulator-x is written in Python (3.7) and can be used either as a module or as a command-line tool. 
 It is the first open source implementation of the estimation method introduced in [Nothnagel et al., 2012](https://www.sciencedirect.com/science/article/pii/S1872497312000713?via%3Dihub), which is the gold-standard for the estimation of recombination rates for X-chromosomal markers. We designed recombulator-x to solve some practical issues with the original R implementation. Its main advantages are:
 
 * performance: much faster than the original implementation, thanks to algorithmic improvements (dynamic programming)
