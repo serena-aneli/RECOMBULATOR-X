@@ -31,7 +31,7 @@ We thank Prof. Michael Nothnagel for kindly sharing the original R implementatio
 
 ## :wrench: Installation
 
-You can install RECOMBULATOR-X via the **pip** command from the standard pypi repository:
+You can install RECOMBULATOR-X via the **pip** command from the standard PyPI repository:
 
 ```bash
 pip install RECOMBULATOR-X
