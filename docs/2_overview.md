@@ -29,7 +29,14 @@ In detail, recombulator-x performs the following steps to infer recombination an
 
 ## Features
 
-- Inference of recombination rate faster for many markers
+* performance: much faster than the original implementation, thanks to algorithmic improvements (dynamic programming)
+* open source: full source code and documentation available from github
+* input parsing: reads pedigree data in standard (PED) format
+* user friendly: easy installation (via pip) and usage with a simple command-line tool
+* - data consistency checks
+- informative family extraction and preprocessing
+- multiple implementations included
+- numba
 - Mutation rates can estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
 
