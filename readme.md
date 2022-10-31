@@ -1,13 +1,11 @@
 # RECOMBULATOR-X
 
 <p align="center">
-  <img align="left" width="350" height="350" src="docs/assets/images/LOGO.png">
+  <img align="left" width="300" height="300"  src="assets/images/LOGO.png">
 </p>
 <br/>
 <br/>
-<br/>
-RECOMBULATOR-X is a *Python module* and a *command line tool* for computing the recombination rates between short tandem repeats (STRs) markers along the X chromosome starting from pedigree data.
-<br/>
+RECOMBULATOR-X is a Python module and command line tool for computing the recombination rates between short tandem repeats (STRs) markers along the X chromosome starting from pedigree data in forensic genetics.
 <br/>
 <br/>
 <br/>
@@ -20,19 +18,16 @@ RECOMBULATOR-X is a *Python module* and a *command line tool* for computing the 
 
 <br/>
 <br/>
-<br/>
-<br/>
 
+RECOMBULATOR-X is written in Python (3.6) and can be used either as a module or as a command-line tool. 
+It is the first open source implementation of the estimation method introduced in [Nothnagel et al., 2012](https://www.sciencedirect.com/science/article/pii/S1872497312000713?via%3Dihub), which is the gold-standard for the estimation of recombination rates for X-chromosomal markers. We designed RECOMBULATOR-X to solve some practical issues with the original R implementation. Its main advantages are:
 
-The program is written in Python (3.6) and can be used as a Python module or a command-line tool. 
+* performance: much faster than the original implementation, thanks to algorithmic improvements (dynamic programming)
+* open source: full source code and documentation available from github
+* input parsing: reads pedigree data in standard (PED) format
+* user friendly: easy installation (via pip) and usage with a simple command-line tool
 
-We designed RECOMBULATOR-X to solve some issues in the computation of recombination rates for X-chromosomal markers in forensics:
-
-* current methods from pedigrees proved to be unsuitable when more than 15 STR markers are considered
-* bla
-* bla
-* bla
-
+We thank Prof. Michael Nothnagel for kindly sharing the original R implementation with us, which was an important reference for the development.
 
 ## :open_book: Documentation
 Full documentation is available online at the :open_book: [dedicated website](https://serena-aneli.github.io/RECOMBULATOR-X/), or in this repository under ```docs```.
@@ -40,12 +35,11 @@ Full documentation is available online at the :open_book: [dedicated website](ht
 
 ## :wrench: Installation
 
-You can install RECOMBULATOR-X via **pip**
+You can install RECOMBULATOR-X via the **pip** command from the standard PyPI repository:
 
 ```bash
 pip install RECOMBULATOR-X
 ```
-
 
 ## :mortar_board: Overview
 
@@ -59,17 +53,21 @@ The main statistical approach for the estimation of recombination rates from ped
 
 We developed RECOMBULATOR-X to overcome this issue. Built upon the same statistical framework of the previous work (Nothnagel et al., 2012), RECOMBULATOR-X uses a new computational strategy to infer recombination rates for X-STRs, while taking also the probability of mutation into account. 
 
-## :boom: Features
+## :boom: Additional features
 
-- Inference of recombination rate faster for many markers
+- data consistency checks
+- informative family extraction and preprocessing
+- multiple implementations included
+- numba
 - Mutation rates can estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
 
 ## :rocket: Benchmark
 
-- Inference of recombination rate faster for many markers
-- Mutation rates can estimated for each marker separately or as a unique parameter 
-- Simulation of pedigrees typed with STRs
+- DIRE QUI CHE FUNZIONA PER FAMIGLIE DI TIPO I E NON II? far exceed the computational speed of the previous approach at least for type I families NEL BENCHMARK
+Performance has been the main focus of RECOMBULATOR-X: in a test with simulated data of the same size as 
+This is due to algorithmic improvement and
+Performance in particular is much improved, 
 
 ## :computer: Usage
 
