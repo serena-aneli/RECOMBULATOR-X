@@ -1,12 +1,12 @@
 # RECOMBULATOR-X
 
 <p align="center">
-  <img align="left" width="350" height="350" src="assets/images/LOGO.png">
+  <img align="left" width="330" height="350" src="assets/images/LOGO.png">
 </p>
 <br/>
 <br/>
 <br/>
-RECOMBULATOR-X is a *Python module* and a *command line tool* for computing the recombination rates between short tandem repeats (STRs) markers along the X chromosome starting from pedigree data in forensic genetics.
+RECOMBULATOR-X is a Python module and a command line tool for computing the recombination rates between short tandem repeats (STRs) markers along the X chromosome starting from pedigree data in forensic genetics.
 <br/>
 <br/>
 <br/>
