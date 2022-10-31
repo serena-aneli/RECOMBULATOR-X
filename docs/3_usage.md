@@ -41,10 +41,6 @@ Here is a family (each row is an individual):
 
 ---
 
-## Tools
-
-FORSE NON SERVE UNA SEZIONE TOOLS
-
 ## Python module and workflow
 
 A detailed guide for the Python module usage can be found in the Jupyter Notebook [Estimation Example.ipynb](LINK) on GitHub.
@@ -122,10 +118,6 @@ RECOMBULATOR-X ped_path --estimate-mutation-rates all
 
 The output of RECOMBULATOR-X command line interface is returned in a tabular format according to the options *no*, *one*, *all* for the parameter `--estimate-mutation-rates`. In particular, the recombination rates are computed between markers following the order in which they were provided in the PED file.
 
-<table>
-<tr><th> no </th><th> one </th><th> all </th></tr>
-        
-<tr><td><table></table>
 
 | TYPE          | MARKER | RATE   |       
 |---------------|--------|--------|
@@ -135,7 +127,7 @@ The output of RECOMBULATOR-X command line interface is returned in a tabular for
 | RECOMBINATION | M4-M5  | 0.1683 |
 | RECOMBINATION | M5-M6  | 0.0138 |
 
-</td><td>
+
 
 | TYPE          | MARKER | RATE   |       
 |---------------|--------|--------|
@@ -146,7 +138,7 @@ The output of RECOMBULATOR-X command line interface is returned in a tabular for
 | RECOMBINATION | M4-M5  | 0.1634 |
 | RECOMBINATION | M5-M6  | 0.0091 |
  
-</td><td>
+
         
 
 | TYPE          | MARKER | RATE   |        
@@ -163,12 +155,9 @@ The output of RECOMBULATOR-X command line interface is returned in a tabular for
 | RECOMBINATION | M4-M5  | 0.1605 |
 | RECOMBINATION | M5-M6  | 0.0141 |
         
-</td></tr> </table>
 
 
-AGGIUNGERE LINK ALLE FUNZIONI
 
-AGGIUNGERE DESCRIZIONE DI COSA FA IL TOOL NELLA SEZIONE TOOLS
 
 
 
