@@ -8,20 +8,23 @@ def ped2graph(path):
     It returns a list of tuples, each composed by the graph, a dictionary (with iid as key and their tab row as value) and the family identifier.
     """
 
-    # read ped file
-    # FIXME separator may be any space
-    # FIXME na values should be 0 (or -9 for phenotype)
-    # FIXME handle headerless peds
+    # read pedigree data
     if path.endswith('.tsv'):
         tab = pandas.read_csv(path, sep='\t', dtype=str, na_values=['0'], index_col=False)
-        #tab = pandas.read_csv(path, sep='\t', dtype={'SEX': str}, na_values=['0'])
     elif path.endswith('.xlsx'):
         tab = pandas.read_excel(path)
-    #else:
-    #    tab = pandas.read_csv(path, sep='\t', dtype={'SEX': str})
+    else: # ped
+        tab = pandas.read_csv(path, sep='\s+', dtype=str, na_values=['0'], index_col=False, header=None)
+        assert tab.shape[1] > 6 and tab.shape[1] % 2 == 0
+        n_markers = int((tab.shape[1] - 6)/2)
+        tab.columns = [
+                'FID', 'IID', 'PAT', 'MAT', 'SEX', 'PHENO'
+            ] + [
+                f'M{marker}-A{allele}' for marker in range(n_markers) for allele in range(2)
+        ]
 
     # check even number of columns
-    assert tab.shape[1] % 2 == 0
+    assert tab.shape[1] > 6 and tab.shape[1] % 2 == 0
 
     #tab.iloc[:, 6:] = tab.iloc[:, 6:].astype(float)
 

@@ -150,7 +150,7 @@ def individuals2ped(path, marker_names, individuals):
             n_haps = geno.shape[0]
             geno0 = numpy.array([geno[0], [0]*geno.shape[1]]) if n_haps == 1 else geno
             sex = sex_coding[n_haps]
-            print(fid, iid, pat or 0, mat or 0, sex, -1, *geno0.T.reshape(-1), sep='\t', file=ped)
+            print(fid, iid, pat or 0, mat or 0, sex, -9, *geno0.T.reshape(-1), sep='\t', file=ped)
 
 
 def compute_family_likelihood_empirical(mother, maternal_haplotypes, is_mother_phased, recombination_rates, mutation_rates):
