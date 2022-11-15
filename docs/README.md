@@ -59,12 +59,8 @@ We developed recombulator-x to overcome this issue. Built upon the same statisti
 
 ## :rocket: Benchmark
 
-- DIRE QUI CHE FUNZIONA PER FAMIGLIE DI TIPO I E NON II? far exceed the computational speed of the previous approach at least for type I families NEL BENCHMARK
-Performance has been the main focus of recombulator-x: in a test with simulated data of the same size as 
-This is due to algorithmic improvement and
-Performance in particular is much improved, 
-
-
+recombulator-x far exceed the computational speed of the previous approach and it is scalable to many more markers.  
+Indeed, Performance has been the main focus of recombulator-x: in a test with simulated data of the same size as the two previous works, the time necessary for the likelihood computation of a single family drops from "several months" on 32 cores of a HPC node for the previous approach to 20 minutes on a single core with recombulator-x. This is due to algorithmic improvement time complexity going from exponential to linear with our approach. Conversely, even though the algorithm time complexity is still exponential for type II families, the speed improvement is substantial with respect to the the previous implementation.
 
 ## :computer: Usage
 
