@@ -43,9 +43,13 @@ Here is a family (each row is an individual):
 
 ## Python module and workflow
 
-A detailed guide for the Python module usage can be found in the Jupyter Notebook [Estimation Example.ipynb](LINK) on GitHub.
+A detailed guide for the Python module usage can be found in the Jupyter Notebook [Estimation Example.ipynb](https://github.com/serena-aneli/recombulator-x/blob/gh-pages/Estimation%20Example.ipynb) on GitHub. 
 
-The initial steps of the Python module recombulator-x consist in reading the PED file and identifying the informative families for the estimation of recombination rates using the function [`ped2graph`](LINK). For recombination, informative subfamilies are either those with:
+The initial steps of the Python module recombulator-x consist in reading the PED file and identifying the informative families for the estimation of recombination rates using the function [`ped2graph`](LINK). This function takes a ped file as input and build a graph with the relationships. It returns a list of tuples, each composed by the graph, a dictionary (with iid as key and their tab row as value) and the family identifier. 
+
+The pedigree file can be a *.tsv* (tab as separator value), a *.xlsx* or whatever format with a space as separator value.
+
+For recombination, informative subfamilies are either those with:
 
 - a phased mother and at least one son or phased daughter, called type I families
 - an unphased mother and at least two between sons and phased daughters, called type II families
