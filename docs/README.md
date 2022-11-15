@@ -70,5 +70,5 @@ Performance in particular is much improved,
 
 recombulator-x reads data in the [PLINK](https://www.cog-genomics.org/plink/) pedigree file format (PED). The PED format stores both sample pedigree information (i.e., the familial relationships between samples) and genotypes. More information on the input file can be found within the [Usage](3_usage.md) section of this documentation or in GitHub under ```docs/3_usage.md```.
 
-The program can be used both as a Python module or a command-line tool. A detailed notebook for the Python module can be found [here]. 
+The program can be used both as a Python module or a command-line tool. A detailed notebook for the Python module can be found [here](https://github.com/serena-aneli/recombulator-x/blob/gh-pages/Estimation%20Example.ipynb). 
 
