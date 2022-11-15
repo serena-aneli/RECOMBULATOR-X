@@ -45,7 +45,7 @@ Here is a family (each row is an individual):
 
 A detailed guide for the Python module usage can be found in the Jupyter Notebook [Estimation Example.ipynb](https://github.com/serena-aneli/recombulator-x/blob/gh-pages/Estimation%20Example.ipynb) on GitHub. 
 
-The initial steps of the Python module recombulator-x consist in reading the PED file and identifying the informative families for the estimation of recombination rates using the function [`ped2graph`](LINK). This function takes a ped file as input and build a graph with the relationships. It returns a list of tuples, each composed by the graph, a dictionary (with iid as key and their tab row as value) and the family identifier. 
+The initial steps of the Python module recombulator-x consist in reading the PED file and identifying the informative families for the estimation of recombination rates using the function `ped2graph`. This function takes a ped file as input and build a graph with the relationships. It returns a list of tuples, each composed by the graph, a dictionary (with iid as key and their tab row as value) and the family identifier. 
 
 The pedigree file can be a *.tsv* (tab as separator value), a *.xlsx* or whatever format with a space as separator value.
 
@@ -56,14 +56,14 @@ For recombination, informative subfamilies are either those with:
 
 Notably, females can be phased when their father is available: in this way, they will be virtually transformed into males, thus being allowed to take part to informative families.
  
-The function [`plot_family_graph`](LINK) can then be used to graphically represent the reported relationships between individuals within the same family. 
+The function `plot_family_graph` can then be used to graphically represent the reported relationships between individuals within the same family. 
 
 ```Python
 family_graphs, marker_names = xstr_recomb.ped2graph(ped_path)
 xstr_recomb.families.plot_family_graph(family_graphs[0][1]) 
 ```
 
-The fuction [`preprocess_families`](LINK) will then check the consistency of each family graph and raise errors whenever necessary. For instance, an error is raised when more than two parents or same-sex parents are present in the same family. Unconnected individuals are also flagged.
+The fuction `preprocess_families` will then check the consistency of each family graph and raise errors whenever necessary. For instance, an error is raised when more than two parents or same-sex parents are present in the same family. Unconnected individuals are also flagged.
 
 ```Python
 processed_families = xstr_recomb.preprocess_families(family_graphs)
