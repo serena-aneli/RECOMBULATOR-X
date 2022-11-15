@@ -50,12 +50,12 @@ We developed recombulator-x to overcome this issue. Built upon the same statisti
 
 ## :boom: Additional features
 
-- data consistency checks
-- informative family extraction and preprocessing
-- multiple implementations included
-- numba
-- Mutation rates can estimated for each marker separately or as a unique parameter 
-- Simulation of pedigrees typed with STRs
+- Data consistency checks
+- Automatic family preprocessing and informative family extraction 
+- Multiple likelihood implementations included
+- Accelerated likelihood computation with the JIT Python compiler Numba
+- Mutation rates can be estimated for each marker separately or as a unique parameter 
+- Simulation of pedigrees typed with STR
 
 ## :rocket: Benchmark
 
