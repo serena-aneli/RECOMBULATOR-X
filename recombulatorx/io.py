@@ -4,8 +4,25 @@ from networkx import DiGraph
 
 def ped2graph(path):
     """
-    This function takes a ped file as input and build a graph with the relationships.
-    It returns a list of tuples, each composed by the graph, a dictionary (with iid as key and their tab row as value) and the family identifier.
+    This function takes a pedigree file as input and encodes it as graphs.
+    
+    The pedigree file can be a table in .ped format (headerless and space-separated),
+    in .tsv format (with header and tab-separated) or in .xlsx format (experimental).
+    The format is inferred by the extension.
+    
+    The graphs are DiGraphs objects from the networkx module, where each node is an
+    individual and edges go from parent to child. The nodes include individual information
+    (sex and genotypes) as attributes.
+    
+    IMPORTANT: markers must be sorted by genomic position, since we assume that recombination
+    happens between adjacent markers.
+    
+    path: str
+        path to the pedigree file
+    
+    Returns: tuple
+        a list of tuples (family ID, DiGraphs) for each family ID in the pedigree file and 
+        a list of marker names.
     """
 
     # read pedigree data

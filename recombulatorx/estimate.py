@@ -86,8 +86,12 @@ def estimate_rates(
   optimization_method='L-BFGS-B', # default from the original R code
   maxiter=1000,
 ):
-    """Estimate recombination and optionally mutation rates from a set of families by expectation maximization, that is by finding recombination and mutation rates that maximize the likelihood of observing the given families.
-    Implemented using scipy.optimize.minimize to find recombination and mutation rates that minimize the negative log likelihood.
+    """Estimate recombination and optionally mutation rates from a set of families.
+    
+    Estimation is done by expectation maximization, that is by finding recombination 
+    and mutation rates that maximize the likelihood of observing the given families.
+    Implemented using scipy.optimize.minimize to find recombination and mutation rates 
+    that minimize the negative log likelihood.
     
     families: sequence of families
         the preprocessed genetic data of all the families
@@ -107,7 +111,7 @@ def estimate_rates(
     Returns: arrays
         an array of estimated recombination rates if estimate_mutation_rates is 'no',
         a tuple of an array of estimated recombination rates and a scalar mutation rate if estimate_mutation_rates is 'one',
-                a tuple of an array of estimated recombination rates and an array of mutation rates if estimate_mutation_rates is 'all'
+        a tuple of an array of estimated recombination rates and an array of mutation rates if estimate_mutation_rates is 'all'
     """
     # parameter preprocessing
     #if estimate_mutation_rates:

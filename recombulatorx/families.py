@@ -33,7 +33,18 @@ def check_family_graph(fid, G):
 
 # Plotting function
 def plot_family_graph(G, title=None):
-    '''Plot the family graph'''
+    """Plot a family graph.
+    
+    Requires the matplotlib module.
+    
+    G: networkx.DiGraph
+        family graph
+    title: str
+        plot title
+    
+    Returns: matplotlib.Figure
+        the family plot
+    """
     import matplotlib.pyplot as plt
     fig = plt.figure()
     plt.plot()
@@ -245,6 +256,20 @@ def preprocess_family(fam, r, inheritance_matrix, max_phasing_muts=0):
 
 from .likelihood_direct import get_basic_arrays # maybe remove all dependecies from likelyhood_direct?
 def preprocess_families(family_graphs):
+    """Preprocess family graphs for rates estimation.
+    
+    Does the following preprocessing steps:
+    - checks the consistency of the parsed family graphs,
+    - finds all the informative subfamilies from each family,
+    - phases all females using their father when available,
+    - packs the inherited maternal haplotypes into a matrix
+    
+    family_graphs: sequence of tuples (str, networkx.DiGraph)
+        sequence of tuples of family IDs and family graphs
+    
+    Returns: list of ProcessedFamily
+        the preprocessed families
+    """
     for fid, G in family_graphs:
         check_family_graph(fid, G)
     recomb_fams, mut_fams = extract_informative_subfamilies(family_graphs) # we are ignoring mut_fams!
