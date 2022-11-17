@@ -11,7 +11,7 @@ The estimation of recombination and mutation rates can be launched with the func
 * which mutation rate needs to be estimated (no: no mutation rate estimation, one: just one mutation rate for all markers, all: a mutation rate for each marker),
 * the type of implementation (the default implementation is the one using dynamic programming).
 
-**Important**: Genetic markers (from the 7th column on) must be provided according to their physical genomic position. Indeed, the algorithm will infer the recombination rate between M1 and M2, M2 and M3 and so on.
+⚠️ **Important**: Genetic markers (from the 7th column on) must be provided according to their physical genomic position. Indeed, the algorithm will infer the recombination rate between M1 and M2, M2 and M3 and so on.
 
 ```python
 help(recombulatorx.estimate_rates)
