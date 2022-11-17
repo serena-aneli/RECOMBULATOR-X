@@ -12,7 +12,7 @@ For recombination, informative subfamilies are either those with:
 
 Notably, females can be phased when their father is available: in this way, they will be virtually transformed into males, thus being allowed to take part to informative families.
 
-```Python
+```python
 help(recombulatorx.preprocess_families)
 ```
 ```text
