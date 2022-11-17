@@ -4,7 +4,7 @@ sort: 1
 
 # ped2graph
 
-```Python
+```python
 help(recombulatorx.estimate_rates)
 ```
 ```text
