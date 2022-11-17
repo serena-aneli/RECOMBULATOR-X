@@ -15,6 +15,7 @@ Notably, females can be phased when their father is available: in this way, they
 ```python
 help(recombulatorx.preprocess_families)
 ```
+
 ```text
 Help on function preprocess_families in module recombulatorx.families:
 
@@ -32,4 +33,4 @@ preprocess_families(family_graphs)
     
     Returns: list of ProcessedFamily
         the preprocessed families
-    ```   
+```   
