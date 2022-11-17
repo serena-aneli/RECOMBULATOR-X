@@ -375,16 +375,20 @@ def get_likelihood_implementation(phased: bool, implementation=None):
     raise ValueError("Could not find an available implementation for '{implementation}'")
         
 def compute_family_likelihood(fam: ProcessedFamily, recombination_rates, mutation_rates, implementation=None):
-    """
+    """Compute the likelihood of observing a family given the recombination and mutation rates.
     Dispatches the computation to one of the available implementations.
 
     fam: ProcessedFamily
         the processed family to compute the likelihood of
-    recombination_rates: array
-        the ricombination rates
-    mutation_rates: array
+    recombination_rates: array of shape (n_markers - 1, )
+        the recombination rates
+    mutation_rates: array of shape (n_markers, )
+        the mutation rates
     implementation: None | str | list of str
         one or more names of the likelihood implementation to use, None for automatic selection
+    
+    Returns: float
+        family likelyhood
     """
     n = len(fam.mother)
     
