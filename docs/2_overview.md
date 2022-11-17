@@ -9,7 +9,7 @@ STRs located on the X chromosome are a valuable resource for solving complex kin
 
 For more details on X-STR kinship analyses in forensic see [Gomes et al., 2020](https://www.frontiersin.org/articles/10.3389/fgene.2020.00926/full) and [Tillmar et al., 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301126?via%3Dihub).
 
-In the case of forensic X-STRs, recombination rates have been either inferred from population samples through high-density multi-point single nucleotide polymorphism (SNP) data or directly estimated in large pedigree-based studies. However, while population-based approach may suffer from long-term population size changes and selection effects, pedigree studies infer recombination across a few generations by directly observing the inheritance of alleles between parents and offspring and thus estimating the recombination fraction among the loci [Peñalba and Wolf, 2020](https://www.nature.com/articles/s41576-020-0240-1).
+In the case of forensic X-STRs, recombination rates have been either inferred from population samples through high-density multi-point single nucleotide polymorphism (SNP) data or directly estimated in large pedigree-based studies. However, while population-based approach may suffer from long-term population size changes and selection effects, pedigree studies infer recombination across a few generations by directly observing the inheritance of alleles between parents and offspring and thus estimating the recombination fraction among the loci ([Peñalba and Wolf, 2020](https://www.nature.com/articles/s41576-020-0240-1)).
 
 ## Statistical framework
 
