@@ -7,6 +7,7 @@ sort: 2
 ```python
 help(recombulatorx.families.plot_family_graph)
 ```
+
 ```text
 Help on function plot_family_graph in module recombulatorx.families:
 
@@ -22,4 +23,4 @@ plot_family_graph(G, title=None)
     
     Returns: matplotlib.Figure
         the family plot
-    ```   
+ ```   
