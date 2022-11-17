@@ -7,6 +7,7 @@ sort: 1
 ```python
 help(recombulatorx.ped2graph)
 ```
+
 ```text
 Help on function ped2graph in module recombulatorx.io:
 
@@ -27,4 +28,4 @@ ped2graph(path)
     Returns: tuple
         a list of tuples (family ID, DiGraphs) for each family ID in the pedigree file and 
         a list of marker names.
-    ```   
+```   
