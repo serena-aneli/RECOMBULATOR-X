@@ -7,6 +7,7 @@ sort: 5
 ```python
 help(recombulatorx.testing.generate_complex_families)
 ```
+
 ```text
 Help on function generate_complex_families in module recombulatorx.testing:
 
@@ -29,4 +30,4 @@ generate_complex_families(n_fam_I: int, n_fam_II: int, recombination_rates, muta
     
     Returns:
         an iterator to the generated individuals
-    ```
+```
