@@ -58,20 +58,20 @@ Notably, females can be phased when their father is available: in this way, they
  
 The function `plot_family_graph` can then be used to graphically represent the reported relationships between individuals within the same family. 
 
-```Python
+```python
 family_graphs, marker_names = xstr_recomb.ped2graph(ped_path)
 xstr_recomb.families.plot_family_graph(family_graphs[0][1]) 
 ```
 
 The fuction `preprocess_families` will then check the consistency of each family graph and raise errors whenever necessary. For instance, an error is raised when more than two parents or same-sex parents are present in the same family. Unconnected individuals are also flagged.
 
-```Python
+```python
 processed_families = xstr_recomb.preprocess_families(family_graphs)
 ```
 
 The estimation of recombination and mutation rates can be launched with the following line:
 
-```Python
+```python
 est_recomb_rates, est_mut_rates = estimate_rates(processed_families, 0.1, 0.1, estimate_mutation_rates='all')
 ```
 
