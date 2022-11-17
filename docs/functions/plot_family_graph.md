@@ -4,7 +4,7 @@ sort: 2
 
 # plot_family_graph
 
-```Python
+```python
 help(recombulatorx.families.plot_family_graph)
 ```
 ```text
