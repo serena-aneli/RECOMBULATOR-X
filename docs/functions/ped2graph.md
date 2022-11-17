@@ -5,7 +5,7 @@ sort: 1
 # ped2graph
 
 ```python
-help(recombulatorx.estimate_rates)
+help(recombulatorx.ped2graph)
 ```
 ```text
 Help on function ped2graph in module recombulatorx.io:
