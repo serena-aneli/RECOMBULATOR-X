@@ -63,7 +63,7 @@ We developed recombulator-x to overcome this issue. Built upon the same statisti
 
 ## :rocket: Benchmark
 
-recombulator-x far exceed the computational speed of the previous approach and it is scalable to many more markers.  
+recombulator-x far exceeds the computational speed of the previous approach and it is scalable to many more markers.  
 Indeed, performance has been the main focus of recombulator-x: in a test with simulated data of the same size as the two previous works, the time necessary for the likelihood computation of a single family drops from "several months" on 32 cores of a HPC node for the previous approach to 20 minutes on a single core with recombulator-x. This is due to algorithmic improvement time complexity going from exponential to linear with our approach. Conversely, even though the algorithm time complexity is still exponential for type II families, the speed improvement is substantial with respect to the the previous implementation.
 
 ## :computer: Usage
