@@ -354,8 +354,8 @@ def get_likelihood_implementation(phased: bool, implementation=None):
     """
     if implementation is None:
         implementation_list = [
-          'dynamic_numba',
-          'dynamic_jax',
+          'dynamic-numba',
+          'dynamic-jax',
           'dynamic',
           'direct_numpy',
           'direct_loop_numba',
@@ -372,7 +372,7 @@ def get_likelihood_implementation(phased: bool, implementation=None):
             func = phased_func if phased else unphased_func
             if func is not None:
                 return func
-    raise ValueError("Could not find an available implementation for '{implementation}'")
+    raise ValueError(f"Could not find an available implementation for '{implementation}'")
         
 def compute_family_likelihood(fam: ProcessedFamily, recombination_rates, mutation_rates, implementation=None):
     """Compute the likelihood of observing a family given the recombination and mutation rates.
