@@ -135,7 +135,7 @@ if False:
 
                 # each leaf should have a lower (or equal) likelihood than than the previous, 
                 # however there may be very small increases probably due to rounding errors, 
-                # so allow very small increases
+                # so we allow very small increases
                 if (last_lh - lh)/lh < -1e-12:
                     print(last_lh, lh, last_lh - lh, (last_lh - lh)/lh, "leaf monotonicity failure")
                 assert (last_lh - lh)/lh >= -1e-12, "leaf monotonicity failure"
@@ -237,8 +237,8 @@ def compute_unphased_family_likelihood_dyn_queue_inner(mother, recombination_rat
             # however there may be very small increases probably due to rounding errors, 
             # so allow very small increases
             #if last_lh < lh:
-            if (last_lh - lh)/lh < -1e-15:
-                print("leaf monotonicity failure", last_lh, lh, last_lh - lh, (last_lh - lh)/lh)
+            #if (last_lh - lh)/lh < -1e-15:
+            #    print("leaf monotonicity failure", last_lh, lh, last_lh - lh, (last_lh - lh)/lh)
             assert (last_lh - lh)/lh >= -1e-12, "leaf monotonicity failure"
             last_lh = lh
 
