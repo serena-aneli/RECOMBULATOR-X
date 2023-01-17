@@ -29,7 +29,7 @@ From the 7th column on, there are the markers genotypes (two columns for a genet
 
 Here is a family (each row is an individual):
 
-| **FID** |   **IID**   |   **PAT**   | **MAT** | **SEX** | **PHENO** | **STR-A1** | **STR-A2** | **STR-A1** | **STR-A2** | **STR-A1** | **STR-A2** |
+| **FID** |   **IID**   |   **PAT**   | **MAT** | **SEX** | **PHENO** | **STR1-A1** | **STR1-A2** | **STR2-A1** | **STR2-A2** | **STR3-A1** | **STR3-A2** |
 |:-------:|:-----------:|:-----------:|:-------:|:-------:|:---------:|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
 | FAM_I | GRANDFATHER | 0           | 0       | 1       | -9        | 12         | 0          | 29         | 0          | 39         | 0          |
 | FAM_I | MOTHER      | GRANDFATHER | 0       | 2       | -9        | 12         | 16         | 27         | 29         | 34         | 39         |
