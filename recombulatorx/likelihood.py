@@ -1,5 +1,6 @@
 import numpy
 from . import ProcessedFamily
+import warnings
 
 def compute_phased_family_likelihood_dyn_loop(mother, maternal_haplotypes, recombination_rates, mutation_rates):
     """Simple dynamic programming implementation of phased (type I) family likelihood.
@@ -348,7 +349,6 @@ except ModuleNotFoundError:
 
 #if 'dynamic-numba' not in implementations and 'dynamic-jax' not in implementations:
 #    print('No available accelerated version since') # FIXME 
-
 def get_likelihood_implementation(phased: bool, implementation=None):
     """Select the best available implementation for likelihood computation
     """
@@ -371,6 +371,8 @@ def get_likelihood_implementation(phased: bool, implementation=None):
             phased_func, unphased_func = implementations[impl]
             func = phased_func if phased else unphased_func
             if func is not None:
+                if implementation is None and impl == 'dynamic':
+                    warnings.warn('install numba for faster estimation!')
                 return func
     raise ValueError(f"Could not find an available implementation for '{implementation}'")
         
