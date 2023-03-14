@@ -295,3 +295,11 @@ def run_test():
         time_df_acc[n_markers] = df.reset_index()
         full_df = pandas.concat(time_df_acc, names=['n_markers', 'row']).reset_index('row', drop=True).reset_index()
 
+import unittest
+
+class IntegrationTest(unittest.TestCase):
+    def test_base(self):
+        import recombulatorx
+        family_graphs, markers = recombulatorx.ped2graph('testsim.tsv')
+        processed_families = recombulatorx.preprocess_families(family_graphs)
+        est_recomb_rates, est_mut_rates = recombulatorx.estimate_rates(processed_families, 0.1, 0.1, estimate_mutation_rates='all')
