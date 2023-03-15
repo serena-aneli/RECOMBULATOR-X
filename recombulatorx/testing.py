@@ -1,6 +1,6 @@
-import itertools
 import numpy
 from . import ProcessedFamily
+import unittest
 ##########################
 # TEST FAMILY GENERATION #
 ##########################
@@ -206,96 +206,6 @@ def compute_family_likelihood_empirical(mother, maternal_haplotypes, is_mother_p
     ]
     return numpy.prod(lh_acc)
 
-
-def generate_processed_families(n_type_I: int, n_type_II: int, n_sons: int, recombination_rates, mutation_rates):
-    pfams = []
-    for i in range(n_type_I):
-        mother, sons = generate_processed_family(n_sons, recombination_rates, mutation_rates)
-        pfams.append(dict(
-            fid=f"type_I_{i + 1}",
-            mother=mother,
-            is_mother_phased=True,
-            maternal_haps=sons,
-        ))
-    for i in range(n_type_II):
-        mother, sons = generate_processed_family(n_sons, recombination_rates, mutation_rates)
-        pfams.append(dict(
-            fid=f"type_II_{i + 1}",
-            mother=mother,
-            is_mother_phased=False,
-            maternal_haps=sons,
-        ))
-    return pfams
-
-# testing part
-def run_test():
-    from xstr_recomb.likelihood_dyn import compute_phased_family_likelihood_dyn_loop, compute_phased_family_likelihood_dyn_loop_numba, compute_phased_family_likelihood_dyn_vec, compute_unphased_family_likelihood_dyn_queue
-
-    from xstr_recomb.likelihood import precompute_probs, compute_family_likelihood
-    numpy_probs = None # this needs to be defined before calling the function
-    def compute_phased_family_likelihood_numpy(mother, maternal_haplotypes, recombination_rates, mutation_rates):
-        return compute_family_likelihood(mother, maternal_haplotypes, True, numpy_probs['r'], numpy_probs['inheritance_matrix'], numpy_probs['inheritance_probs'], numpy_probs['mutation_probs'])
-    def compute_unphased_family_likelihood_numpy(mother, maternal_haplotypes, recombination_rates, mutation_rates):
-        return compute_family_likelihood(mother, maternal_haplotypes, False, numpy_probs['r'], numpy_probs['inheritance_matrix'], numpy_probs['inheritance_probs'], numpy_probs['mutation_probs'])
-
-    type_I_funcs = {
-        'numpy': compute_phased_family_likelihood_numpy,
-        'dyn_loop': compute_phased_family_likelihood_dyn_loop, 
-        'dyn_vec': compute_phased_family_likelihood_dyn_vec, 
-        'dyn_numba': compute_phased_family_likelihood_dyn_loop_numba, 
-    }
-    type_II_funcs = {
-        'numpy': compute_unphased_family_likelihood_numpy,
-        'dyn_queue': compute_unphased_family_likelihood_dyn_queue,
-        'dyn_queue~es0.1': lambda *x: compute_unphased_family_likelihood_dyn_queue(*x, early_stop=0.1), 
-    }
-
-    import time
-    from xstr_recomb.testing import generate_processed_families, generate_random_rates
-
-    import matplotlib.pyplot as plt
-    import seaborn
-    import pandas
-    max_time = 0.05
-    n_fam_I = 10
-    n_fam_II = 10
-    time_df_acc = {}
-    slow_funcs = set()
-    for n_markers in range(2, 100):
-        print(n_markers)
-        rates = generate_random_rates(n_markers)
-        numpy_probs = None
-        #rand_recomb_rates, rand_mut_rates = 
-        processed_fams_I = generate_processed_families(n_fam_I, 0, 3, *rates)
-        processed_fams_II = generate_processed_families(0, n_fam_II, 3, *rates)
-        time_acc = {}
-        for processed_fams, funcs in [(processed_fams_I, type_I_funcs), (processed_fams_II, type_II_funcs)]: 
-            for fname, f in funcs.items():
-                for i, pf in enumerate(processed_fams):
-                    ftype = 'type I' if pf['is_mother_phased'] else 'type II'
-                    if (fname, ftype) in slow_funcs: continue
-                    if fname == 'numpy':
-                        numpy_probs = precompute_probs(*rates)
-                    t0 = time.time()
-                    lh = f(pf['mother'], pf['maternal_haps'], *rates)
-                    t1 = time.time()
-                    time_acc[(fname, ftype, i)] = [lh, t1 - t0]
-        if len(time_acc) == 0:
-            break
-        
-        df = pandas.DataFrame(time_acc, index=['lh', 'dt']).T
-        df.index.names = ['func', 'fam', 'rep']
-
-        # check if any function is taking too long
-        mean_dt = df.reset_index().groupby(['func', 'fam'])['dt'].mean()
-        new_slow = set(mean_dt.index[mean_dt > max_time])
-        slow_funcs |= new_slow
-        print(n_markers, new_slow)
-
-        time_df_acc[n_markers] = df.reset_index()
-        full_df = pandas.concat(time_df_acc, names=['n_markers', 'row']).reset_index('row', drop=True).reset_index()
-
-import unittest
 
 class IntegrationTest(unittest.TestCase):
     def test_base(self):
