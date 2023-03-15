@@ -47,7 +47,7 @@ def ped2graph(path):
 
     hap1_markers = tab.columns[6::2]
     hap2_markers = tab.columns[7::2]
-    markers = [col.split('-')[0] for col in hap1_markers] # FIXME: marker names
+    marker_names = [col.split('-')[0] for col in hap1_markers] # FIXME: marker names
     
     # recode sex
     possible_sex_codings = [
@@ -68,6 +68,8 @@ def ped2graph(path):
             value_str += '...' 
         raise ValueError(f'Unknown values {value_str} in SEX column of "{path}"')
 
+    marker_types = [None]*len(marker_names)
+    nonstr_coding = {b: i for i, b in enumerate('ACGT')}
 
     # get graph nodes and edges
     fams_list = []
@@ -81,7 +83,7 @@ def ped2graph(path):
             pat = row.at['PAT']
             mat = row.at['MAT']        
             
-            #fam_dict[iid] = row
+            # parse genotypes
             if row.at['SEX'] == 'female':
                 haps = [
                     row.loc[hap1_markers],
@@ -90,14 +92,25 @@ def ped2graph(path):
             else:
                 haps = [row.loc[hap1_markers]]
 
-            geno = numpy.array(haps).T
-            try:
-                geno = geno.astype(float)
-                #print('STR markers detected')
-            except ValueError:
-                #print('SNP markers detected')
-                raise NotImplementedError('SNP markers detected')
-
+            def parse_haplotype(hap, nonstr_coding):
+                # parse alleles and detect STR or OTHER allele type
+                parsed_haplotype = []
+                for i, a in enumerate(hap):
+                    try:
+                        detected_marker_type = 'STR'
+                        c = float(a)
+                    except:
+                        detected_marker_type = 'OTHER'
+                        c = -nonstr_coding.setdefault(a, len(nonstr_coding))
+                    if marker_types[i] is None:
+                        # infer marker type from the first observed haplotype
+                        marker_types[i] = detected_marker_type
+                    elif marker_types[i] != detected_marker_type:
+                        # marker type cannot change between samples/haplotypes
+                        raise ValueError(f"Inconsistent maker type for marker {marker_names[i]}, expected {marker_types[i]}, detected {detected_marker_type}")
+                    parsed_haplotype.append(c)
+                return parsed_haplotype
+            geno = numpy.array([parse_haplotype(h, nonstr_coding) for h in haps]).T
 
             G.add_node(iid, sex=row.at['SEX'], geno=geno)
             if not pandas.isnull(pat):
@@ -112,5 +125,5 @@ def ped2graph(path):
         fam_tuple = (fid, G)
         fams_list.append(fam_tuple)
 
-    return fams_list, markers
+    return fams_list, (marker_names, marker_types, nonstr_coding)
 
