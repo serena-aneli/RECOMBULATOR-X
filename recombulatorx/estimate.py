@@ -8,7 +8,7 @@ def compute_family_likelihood_star(args):
     try:
         return pf.fid, compute_family_likelihood(*args)
     except Exception as e:
-        print(f'Exception computing family likelihood in family {pf}')
+        print(f'Exception computing family likelihood in family {pf}: {e}')
         raise e
 
 
