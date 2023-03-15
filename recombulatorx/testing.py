@@ -303,3 +303,16 @@ class IntegrationTest(unittest.TestCase):
         family_graphs, markers = recombulatorx.ped2graph('testsim.tsv')
         processed_families = recombulatorx.preprocess_families(family_graphs)
         est_recomb_rates, est_mut_rates = recombulatorx.estimate_rates(processed_families, 0.1, 0.1, estimate_mutation_rates='all')
+    
+    def test_impl(self):
+        import recombulatorx
+        available_implementations = recombulatorx.likelihood.implementations.keys()
+        #available_implementations = [i for i in available_implementations if i != 'direct-loop-numba']
+
+        family_graphs, markers = recombulatorx.ped2graph('testsim.tsv')
+        processed_families = recombulatorx.preprocess_families(family_graphs)
+        for impl in available_implementations:
+            with self.subTest(f'impl={impl}'):
+                est_recomb_rates, est_mut_rates = recombulatorx.estimate_rates(
+                    processed_families, 0.1, 0.1, estimate_mutation_rates='all', implementation=impl,
+                )
