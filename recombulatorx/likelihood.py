@@ -48,15 +48,17 @@ def compute_family_mutation_probs(mother, maternal_haplotypes, mutation_rates, n
     a matrix of shape: 2 (mother ploidity), number of maternal haplotypes in the family, number of markers
     """
     assert mother.shape[0] == maternal_haplotypes.shape[1]
-    assert all(mother > 0)
+    
     mut_rate_m = numpy.stack([
         1 - mutation_rates,
         mutation_rates,
         numpy.zeros_like(mutation_rates)
     ])
 
+    #assert numpy.all(mother > 0), 'only STR supported in this implementation!' # replace a_max=numpy.where(mother[:,0] < 0, 1.0, 2.0) in numpy.clip for non-STR ?
     mut_d = mother.T.reshape((2, 1, -1)) - maternal_haplotypes
-    mut_i = numpy.clip(numpy.abs(mut_d), 0, 2)
+    mut_max = numpy.where(mother[:,0] < 0, 1.0, 2.0)
+    mut_i = numpy.clip(numpy.abs(mut_d), 0, mut_max)
     jj = numpy.arange(len(mutation_rates))
     ii = mut_i.astype(numpy.int32)
     # mutp_m.shape: ploidity, mat haps, n_markers
