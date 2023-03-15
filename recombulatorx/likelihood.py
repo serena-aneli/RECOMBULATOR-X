@@ -9,23 +9,28 @@ def compute_phased_family_likelihood_dyn_loop(mother, maternal_haplotypes, recom
     This function can be compiled with numba if available for a big speedup.
     """
     
-    mode = 'SNP' if mother.dtype == '<U1' else 'STR'
     lh = 1.0
     m = numpy.zeros(shape=mother.shape)
     for hap in maternal_haplotypes:
         for pos in range(mother.shape[0]):
             for r in range(2):
                 # compute mutation probability
-                if mode == 'SNP':
-                    mut_step = mother[pos, r] != hap[pos]
-                elif mode == 'STR':
+                if hap[pos] > 0:
+                    # STR marker
                     mut_step = abs(mother[pos, r] - hap[pos])
-                if mut_step == 0:
-                    mutp = 1 - mutation_rates[pos]
-                elif mut_step == 1:
-                    mutp = mutation_rates[pos]
+                    if mut_step == 0:
+                        mutp = 1 - mutation_rates[pos]
+                    elif mut_step == 1:
+                        mutp = mutation_rates[pos]
+                    else:
+                        mutp = 0
                 else:
-                    mutp = 0
+                    # OTHER marker
+                    if mother[pos, r] == hap[pos]:
+                        mutp = 1 - mutation_rates[pos]
+                    else:
+                        mutp = mutation_rates[pos]
+
                 # compute recombination probability
                 m[pos, r] = 0.5*mutp if pos == 0 else mutp*(
                     m[pos - 1, r]*(1 - recombination_rates[pos - 1]) +
@@ -42,6 +47,7 @@ def compute_family_mutation_probs(mother, maternal_haplotypes, mutation_rates, n
     a matrix of shape: 2 (mother ploidity), number of maternal haplotypes in the family, number of markers
     """
     assert mother.shape[0] == maternal_haplotypes.shape[1]
+    assert all(mother > 0)
     mut_rate_m = numpy.stack([
         1 - mutation_rates,
         mutation_rates,
