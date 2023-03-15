@@ -1,6 +1,7 @@
 import numpy
 from . import ProcessedFamily
 import warnings
+from heapq import heappush, heappop
 
 def compute_phased_family_likelihood_dyn_loop(mother, maternal_haplotypes, recombination_rates, mutation_rates):
     """Simple dynamic programming implementation of phased (type I) family likelihood.
@@ -81,103 +82,6 @@ def compute_phased_family_likelihood_dyn_vec(mother, maternal_haplotypes, recomb
 
   
   
-from heapq import heappush, heappop
-if False:
-    def compute_unphased_family_likelihood_dyn_queue_inner(mother, recombination_rates, mutation_probs, cum_lh, early_stop=0.0, fast_stop=0.0):
-        """
-        Use a priority queue to explore the tree of all possible mother phasings starting from those with highest probability.
-
-        """
-        verb = False
-        lh_acc = 0
-        lh_count = 0
-        possible_phasings = 2**(mother.shape[0] - 1)
-
-        
-        # probability for the first marker
-        v = 0.5*mutation_probs[:,:,0]
-        lh = numpy.prod(numpy.sum(v, axis=0))
-        # use a priority queue with tuples with the following format:
-        # 0 - minus the maximum reachable likelihood for the branch leaves
-        # 1 - marker position/branch length
-        # 2 - unique key (int) to retrieve the dyn prog results for the children computation
-        # 3 - the likelihood of the partial branch
-        # 4 - the molteplicity of this branch
-        
-        # 2 is needed to store the partial dynamic programming results since 
-        # we cannot directly put a numpy array in the tuple using numba, 
-        # since numba requires an ordering to be defined for all types 
-        # in the tuple (even if it is never used)
-
-        # 4 is needed since when the mother is homozigous we merge
-        # the two possible branches into one (since they will give the same likelihood in the end)
-        # so we need to keep track of how many possible branches and leaves are
-        # represented by this branch to weight the likelihood when summing all the leaves
-        array_store = {}
-        vkey = 0
-        phase_queue = [(-lh*cum_lh[0], 0, vkey, lh, 1)] # negative likelihood of partial phasing, , partial phasing tuple, number of branchings up to now
-        array_store[vkey] = v
-
-        max_size = 0
-        last_neglh = lh
-        last_lh = 1
-        while phase_queue:
-            max_size = max(max_size, len(phase_queue))
-
-            # retrieve branch with the highest possibile probability
-            neglh, last_pos, vkey0, lh, m = heappop(phase_queue)
-            v0 = array_store.pop(vkey0)
-
-            assert last_neglh >= neglh, "branch monotonicity failure"
-            last_neglh = last_neglh
-
-            pos = last_pos + 1
-            if pos == mother.shape[0]:
-                # this is a full phasing (a leaf)
-                lh = lh/m
-                lh_count += possible_phasings/m
-                lh_acc += lh
-                if verb:
-                    print('full phasing:', -neglh, lh, lh_count, m)
-
-                # each leaf should have a lower (or equal) likelihood than than the previous, 
-                # however there may be very small increases probably due to rounding errors, 
-                # so we allow very small increases
-                if (last_lh - lh)/lh < -1e-12:
-                    print(last_lh, lh, last_lh - lh, (last_lh - lh)/lh, "leaf monotonicity failure")
-                assert (last_lh - lh)/lh >= -1e-12, "leaf monotonicity failure"
-                last_lh = lh
-
-                # early stopping critieria, give approximate results
-                if lh/lh_acc < fast_stop:
-                    if verb:
-                        print('fast stop:', -neglh, lh, fast_stop, possible_phasings, lh_count, possible_phasings - lh_count)
-                    return lh_acc, max_size
-                if lh*(possible_phasings - lh_count)/lh_acc < early_stop:
-                    if verb:
-                        print('early stop:', -neglh, lh, early_stop, possible_phasings, lh_count, possible_phasings - lh_count)
-                    return lh_acc, max_size
-            else:
-                # this is a partial phasing
-                
-                # if the mother is homozygous there is no need to consider the two possible phasings since they yield the same mother's haplotypes
-                cases = 1 if mother[pos, 0] == mother[pos, 1] else 2
-                for p in range(cases):
-                    # compute likelihood for the child node
-                    mp = mutation_probs[:, :, pos]
-                    r = recombination_rates[pos - 1] if p else 1 - recombination_rates[pos - 1] 
-                    v = mp*(v0*(1 - r) + v0[::-1]*r)
-                    lh = numpy.prod(numpy.sum(v, axis=0))
-
-                    # add key
-                    if lh > 0:
-                        vkey += 1
-                        heappush(phase_queue, (-lh*cum_lh[pos], pos, vkey, lh, m*cases))
-                        array_store[vkey] = v
-        
-        #assert 2**(mother.shape[0] - 1) == lh_count, f"{2**(mother.shape[0] - 1)} != {lh_count}"
-        return lh_acc, max_size
-
 def compute_unphased_family_likelihood_dyn_queue_inner(mother, recombination_rates, mutation_probs, cum_lh, early_stop=0.0, fast_stop=0.0):
     """
     Use a priority queue to explore the tree of all possible mother phasings starting from those with highest probability.
