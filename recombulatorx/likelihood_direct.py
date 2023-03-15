@@ -22,6 +22,8 @@ def inheritance_vectors(n: int):
 
 def compute_phased_family_likelihood_direct_loop(mother, maternal_haplotypes, recombination_rates, mutation_rates):
     """Faithful transcription of the original likelihood formula for a phased mother"""
+    if numpy.any(mother < 0):
+        raise ValueError('this likelihood function does not support non-STR markers')
     n = len(mother)
     family_lh = 1.0
     for son in maternal_haplotypes:
@@ -119,6 +121,8 @@ def all_unique_phasings(mother, r, inheritance_matrix):
 
 # Daughter phasing
 def phase_daughter_probs(daughter, father, r, inheritance_matrix, mutation_probs):
+    if numpy.any(daughter < 0):
+        raise ValueError('this function does not support non-STR markers')
     inherited_matrix = daughter[r, inheritance_matrix]
     mutation_matrix = numpy.abs(inherited_matrix - father).clip(0,2)
     mutation_llh = numpy.prod(mutation_probs[r, mutation_matrix], axis=-1)
@@ -209,6 +213,8 @@ def compute_family_likelihood_direct_numpy_inner(mother, maternal_haplotypes, is
     Returns: scalar
         the likelihood of the children maternal halpotypes occurring from recombination and mutation for the given recombination and mutation probability matrices
     """
+    if numpy.any(mother < 0):
+        raise ValueError('this likelihood function does not support non-STR markers')
     # preprocessing part, only depends on genotype data
 
     # possible unique mother phasings, n markers, ploidity=2
