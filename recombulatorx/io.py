@@ -69,7 +69,7 @@ def ped2graph(path):
         raise ValueError(f'Unknown values {value_str} in SEX column of "{path}"')
 
     marker_types = [None]*len(marker_names)
-    nonstr_coding = {b: i for i, b in enumerate('ACGT')}
+    nonstr_coding = {b: i for i, b in enumerate('ACGT', 1)}
 
     # get graph nodes and edges
     fams_list = []
@@ -101,7 +101,7 @@ def ped2graph(path):
                         c = float(a)
                     except:
                         detected_marker_type = 'OTHER'
-                        c = -nonstr_coding.setdefault(a, len(nonstr_coding))
+                        c = -nonstr_coding.setdefault(a, max(nonstr_coding.values()) + 1)
                     if marker_types[i] is None:
                         # infer marker type from the first observed haplotype
                         marker_types[i] = detected_marker_type
