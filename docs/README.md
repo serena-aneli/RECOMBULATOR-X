@@ -25,6 +25,7 @@ It is the first open source implementation of the estimation method introduced i
 * open source: full source code and documentation available from github
 * input parsing: reads pedigree data in standard (PED) format
 * user friendly: easy installation (via pip) and usage with a simple command-line tool
+* comprehensive toolkit: it can deal with short tandem repeats, SNPs and INDELs. 
 
 We thank Prof. Michael Nothnagel for kindly sharing the original R implementation with us, which was an important reference for the development.
 
@@ -50,7 +51,7 @@ We developed recombulator-x to overcome this issue. Built upon the same statisti
 
 ## :boom: Additional features
 
-- With respect to previous works, Recombulator-X can analyse also SNPs and INDELs. 
+- Recombulator-X can analyse also SNPs and INDELs. 
 - Data consistency checks
 - Automatic family preprocessing and informative family extraction 
 - Multiple likelihood implementations included
