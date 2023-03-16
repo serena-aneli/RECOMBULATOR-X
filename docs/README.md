@@ -5,7 +5,7 @@
 </p>
 <br/>
 <br/>
-recombulator-x is a Python module and command line tool for computing the recombination rates between short tandem repeats (STRs) markers along the X chromosome starting from pedigree data in forensic genetics.
+recombulator-x is a Python module and command line tool for computing the recombination rates between short tandem repeats (STRs) markers and other polymorphisms (SNPs and INDELs) along the X chromosome starting from pedigree data in forensic genetics.
 <br/>
 <br/>
 <br/>
@@ -46,10 +46,11 @@ In the case of forensic X-STRs, recombination rates have been either inferred fr
 
 The main statistical approach for the estimation of recombination rates from pedigrees computes the likelihood of kinship by taking into account all possible recombinations within the maternal haplotype, thus resorting to the exponential complexity of the underlying algorithm (see [Nothnagel et al., 2012](https://www.sciencedirect.com/science/article/pii/S1872497312000713?via%3Dihub) for a thorough description of the likelihood computation). Despite a computational update in C++ allowing multi-core parallelization, this approach is expected to be unsuitable when panels of more than 15 X-STRs are considered ([Diegoli et al., 2016](https://www.sciencedirect.com/science/article/pii/S1872497316301247?via%3Dihub)).
 
-We developed recombulator-x to overcome this issue. Built upon the same statistical framework of the previous work (Nothnagel et al., 2012), recombulator-x uses a new computational strategy, based on dynamic programming, to infer recombination rates for X-STRs, while taking also the probability of mutation into account. More details can be found within the [Overview](3_overview.md) section.
+We developed recombulator-x to overcome this issue. Built upon the same statistical framework of the previous work (Nothnagel et al., 2012), recombulator-x uses a new computational strategy, based on dynamic programming, to infer recombination rates for X-STRs and other polymorphisms (SNPs and INDELs), while taking also the probability of mutation into account. More details can be found within the [Overview](3_overview.md) section.
 
 ## :boom: Additional features
 
+- With respect to previous works, Recombulator-X can analyse also SNPs and INDELs. 
 - Data consistency checks
 - Automatic family preprocessing and informative family extraction 
 - Multiple likelihood implementations included
@@ -60,7 +61,7 @@ We developed recombulator-x to overcome this issue. Built upon the same statisti
 ## :rocket: Benchmark
 
 recombulator-x far exceeds the computational speed of the previous approach and it is scalable to many more markers.  
-Indeed, performance has been the main focus of recombulator-x: in a test with simulated data of the same size as the two previous works, the time necessary for the likelihood computation of a single family drops from "several months" on 32 cores of a HPC node for the previous approach to 20 minutes on a single core with recombulator-x. This is due to algorithmic improvement time complexity going from exponential to linear with our approach. Conversely, even though the algorithm time complexity is still exponential for type II families, the speed improvement is substantial with respect to the the previous implementation.
+Indeed, performance has been the main focus of recombulator-x: in a test with simulated data of the same size as the two previous works, the time necessary for the likelihood computation of a single family drops from "several months" on 32 cores of a HPC node for the previous approach to 20 minutes on a single core with recombulator-x. This is due to algorithmic improvement time complexity going from exponential to linear with our approach. Conversely, even though the algorithm time complexity is still exponential for type II families, the speed improvement is substantial with respect to the the previous implementation. Moreover, its capacity of dealing with SNPs and INDELs makes it a comprehensive toolkit for addressing linked markers in forensics. 
 
 ## :computer: Usage
 
