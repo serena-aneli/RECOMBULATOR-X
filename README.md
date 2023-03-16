@@ -5,7 +5,7 @@
 </p>
 <br/>
 <br/>
-recombulator-x is a Python module and command line tool for computing the recombination rates between short tandem repeats (STRs) markers along the X chromosome starting from pedigree data in forensic genetics.
+recombulator-x is a Python module and command line tool for computing the recombination rates between short tandem repeats (STRs) markers and other polymorphisms (SNPs and INDELs) along the X chromosome starting from pedigree data in forensic genetics.
 <br/>
 <br/>
 <br/>
@@ -25,6 +25,7 @@ It is the first open source implementation of the estimation method introduced i
 * open source: full source code and documentation available from github
 * input parsing: reads pedigree data in standard (PED) format
 * user friendly: easy installation (via pip) and usage with a simple command-line tool
+* comprehensive toolkit: it can deal with short tandem repeats, SNPs and INDELs. 
 
 We thank Prof. Michael Nothnagel for kindly sharing the original R implementation with us, which was an important reference for the development.
 
@@ -54,6 +55,7 @@ We developed recombulator-x to overcome this issue. Built upon the same statisti
 
 ## :boom: Additional features
 
+- Recombulator-X can analyse also SNPs and INDELs.
 - Data consistency checks
 - Automatic family preprocessing and informative family extraction 
 - Multiple likelihood implementations included
@@ -64,7 +66,7 @@ We developed recombulator-x to overcome this issue. Built upon the same statisti
 ## :rocket: Benchmark
 
 recombulator-x far exceeds the computational speed of the previous approach and it is scalable to many more markers.  
-Indeed, performance has been the main focus of recombulator-x: in a test with simulated data of the same size as the two previous works, the time necessary for the likelihood computation of a single family drops from "several months" on 32 cores of a HPC node for the previous approach to 20 minutes on a single core with recombulator-x. This is due to algorithmic improvement time complexity going from exponential to linear with our approach. Conversely, even though the algorithm time complexity is still exponential for type II families, the speed improvement is substantial with respect to the the previous implementation.
+Indeed, performance has been the main focus of recombulator-x: in a test with simulated data of the same size as the two previous works, the time necessary for the likelihood computation of a single family drops from "several months" on 32 cores of a HPC node for the previous approach to 20 minutes on a single core with recombulator-x. This is due to algorithmic improvement time complexity going from exponential to linear with our approach. Conversely, even though the algorithm time complexity is still exponential for type II families, the speed improvement is substantial with respect to the the previous implementation. Moreover, its capacity of dealing with SNPs and INDELs makes it a comprehensive toolkit for addressing linked markers in forensics. 
 
 ## :computer: Usage
 
