@@ -7,7 +7,7 @@ permalink: /usage
 
 ## File formats
 
-recombulator-x uses the PED files based on [PLINK](https://www.cog-genomics.org/plink/) pedigree files as input. The PED file format stores sample pedigree information (i.e., the familial relationships between samples) and the genotypes.
+recombulator-x uses a file organized as a PED files ([PLINK](https://www.cog-genomics.org/plink/ pedigree file) as input. The pedigree file can be a *.tsv* (tab as separator value), a *.xlsx* or whatever format with a space as separator value. The PED file format stores sample pedigree information (i.e., the familial relationships between samples) and the genotypes.
 In particular, the first 6 mandatory columns contain: 
 
 * Family ID
