@@ -28,7 +28,7 @@ def main(
     log = logging.getLogger('recombulator-x')
     #logging.basicConfig(filename='demo.log', level=logging.DEBUG)
     
-    family_graphs, marker_names = ped2graph(args.ped_path)
+    family_graphs, (marker_names, marker_types, marker_encoding) = ped2graph(args.ped_path)
     log.info(f'Read {len(family_graphs)} families with {len(marker_names)} markers from pedigree file.')
 
     if len(args.mutation_rates) == 1:
@@ -49,6 +49,7 @@ def main(
 
     log.info(f'Detected {len(processed_families)} informative families')
     log.info(f'Type I families (phased mother): {type_I}, type II families (unphased mother): {type_II}')
+    log.info(f'Estimating rates...')
     estimated_rates = estimate_rates(processed_families, 0.1, starting_mutation_rates, estimate_mutation_rates=args.estimate_mutation_rates)
     
     print('TYPE', 'MARKER', 'RATE', sep='\t')
