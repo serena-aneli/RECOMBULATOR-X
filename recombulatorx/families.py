@@ -165,8 +165,10 @@ def extract_informative_subfamilies(families):
                         sons.append(child['geno'])
                     else:
                         assert child['sex'] == 'female'
-                        daughter_father = G.nodes[get_father(child_name, G)]['geno']
-                        daughters_with_father.append((child['geno'], daughter_father))
+                        father_name = get_father(child_name, G)
+                        if father_name is not None:
+                            daughter_father = G.nodes[father_name]['geno']
+                            daughters_with_father.append((child['geno'], daughter_father))
                 maternal_haplotype_num = len(sons) + len(daughters_with_father)
                 if grandfather is not None and maternal_haplotype_num > 0:
                     ftype = 'typeI'
