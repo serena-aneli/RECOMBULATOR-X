@@ -1,5 +1,5 @@
 import numpy
-from . import ProcessedFamily
+from .types import ProcessedFamily
 import warnings
 from heapq import heappush, heappop
 

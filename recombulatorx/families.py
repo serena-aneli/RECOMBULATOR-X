@@ -3,15 +3,7 @@
 import numpy
 import networkx
 import logging
-from dataclasses import dataclass
-
-@dataclass
-class ProcessedFamily:
-    fid: str
-    is_mother_phased: bool
-    mother: numpy.array
-    maternal_haplotypes: numpy.array
-
+from .types import ProcessedFamily
 
 # Function for checking family graphs and raising eventual errors
 def check_family_graph(fid, G):
