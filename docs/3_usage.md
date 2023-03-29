@@ -59,20 +59,20 @@ Notably, females can be phased when their father is available: in this way, they
 The function `plot_family_graph` can then be used to graphically represent the reported relationships between individuals within the same family. 
 
 ```python
-family_graphs, marker_names = xstr_recomb.ped2graph(ped_path)
+family_graphs, marker_names = recombulatorx.ped2graph(ped_path)
 xstr_recomb.families.plot_family_graph(family_graphs[0][1]) 
 ```
 
 The fuction `preprocess_families` will then check the consistency of each family graph and raise errors whenever necessary. For instance, an error is raised when more than two parents or same-sex parents are present in the same family. Unconnected individuals are also flagged.
 
 ```python
-processed_families = xstr_recomb.preprocess_families(family_graphs)
+processed_families = recombulatorx.preprocess_families(family_graphs)
 ```
 
 The estimation of recombination and mutation rates can be launched with the following line:
 
 ```python
-est_recomb_rates, est_mut_rates = estimate_rates(processed_families, 0.1, 0.1, estimate_mutation_rates='all')
+est_recomb_rates, est_mut_rates = recombulatorx.estimate_rates(processed_families, 0.1, 0.1, estimate_mutation_rates='all')
 ```
 
 The function *estimate_rates* estimates recombination and mutation rates from a set of families and takes the following parameters: 
@@ -97,11 +97,11 @@ where, the first array (n-1 long) stores the recombination rates, while the seco
 The command line interface of recombulator-x takes as input the PED file and returns recombination and mutation rates.  
 
 ```text
-recombulator-x 1.0.0
+usage: recombulator-x [-h] [--mutation-rates MUT-RATE [MUT-RATE ...]]
+                      [--estimate-mutation-rates {no,one,all}]
+                      PED
 
-usage: cli.py [-h] [--mutation-rates MUT-RATE [MUT-RATE ...]] [--estimate-mutation-rates {no,one,all}] PED
-
-Estimate recombination rates.
+Estimate recombination and mutation rates.
 
 positional arguments:
   PED                   path to ped file
@@ -109,7 +109,19 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --mutation-rates MUT-RATE [MUT-RATE ...]
+                        mutation rates used in the estimation, either
+                        as fixed or as starting point in the
+                        optimization depending on the value of the
+                        --estimate-mutation-rates option. If not
+                        given the rates are set to 0.001 for all
+                        markers
   --estimate-mutation-rates {no,one,all}
+                        controls the estimation of the mutation
+                        rates. With "no" the mutation rates are not
+                        estimated, with "one" the same rate is
+                        estimated for all markers, with "all" a
+                        separate estimation rate is estimated for
+                        each marker. Defaults to "no"
 ```
 
 Its basic usage consists in estimating just recombination rate and using the default single value for mutation rate (0.001).
