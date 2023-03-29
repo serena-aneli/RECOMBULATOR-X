@@ -49,7 +49,6 @@ def main(
 
     log.info(f'Detected {len(processed_families)} informative families')
     log.info(f'Type I families (phased mother): {type_I}, type II families (unphased mother): {type_II}')
-    log.info(f'Type I families (phased mother): {type_I}, type II families (unphased mother): {type_II}')
     estimated_rates = estimate_rates(processed_families, 0.1, starting_mutation_rates, estimate_mutation_rates=args.estimate_mutation_rates)
     
     print('TYPE', 'MARKER', 'RATE', sep='\t')
