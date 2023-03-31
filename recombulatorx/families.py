@@ -4,6 +4,7 @@ import numpy
 import networkx
 import logging
 from .types import ProcessedFamily
+from .likelihood import compute_family_likelihood
 
 # Function for checking family graphs and raising eventual errors
 def check_family_graph(fid, G):
@@ -123,7 +124,8 @@ def get_father_geno(
 
 class AmbiguousPhasingError(Exception):
     pass
-
+class FamilyNotInformativeError(Exception):
+    pass
 
 def extract_informative_subfamilies(families):
     """
@@ -164,7 +166,7 @@ def extract_informative_subfamilies(families):
                 maternal_haplotype_num = len(sons) + len(daughters_with_father)
                 if grandfather is not None and maternal_haplotype_num > 0:
                     ftype = 'typeI'
-                elif maternal_haplotype_num > 0:
+                elif maternal_haplotype_num > 1:
                     ftype = 'typeII'
                 else: continue
 
@@ -236,14 +238,31 @@ def preprocess_family(fam, r, inheritance_matrix, max_phasing_muts=0):
         except AmbiguousPhasingError:
             logging.warning(f'discarded one daughter in family {fid} who cannot be unambiguously phased from the father because of mutations')
 
-    if len(maternal_haps) < (1 if is_mother_phased else 2):
-        raise AmbiguousPhasingError()
+    # drop children with incompatible genotypes
+    n = mother.shape[0]
+    rates = numpy.full(n - 1, 0.5), numpy.full(n, 0.1)
+    maternal_haps_ok = []
+    for hap in maternal_haps:
+        hapfam = ProcessedFamily(
+            fid=fid,
+            mother=mother,
+            is_mother_phased=True, 
+            maternal_haplotypes=numpy.stack([hap]),
+        )
+        lh = compute_family_likelihood(hapfam, *rates)
+        if lh == 0:
+            logging.warning(f'discarded one child with incompatible genotypes in family {fid}')
+        else:
+            maternal_haps_ok.append(hap)
+
+    if len(maternal_haps_ok) < (1 if is_mother_phased else 2):
+        raise FamilyNotInformativeError()
 
     processed = ProcessedFamily(
         fid=fam['fid'],
         mother=mother,
         is_mother_phased=is_mother_phased,
-        maternal_haplotypes=numpy.stack(maternal_haps),
+        maternal_haplotypes=numpy.stack(maternal_haps_ok),
     )
 
     return processed
@@ -267,14 +286,19 @@ def preprocess_families(family_graphs):
     for fid, G in family_graphs:
         check_family_graph(fid, G)
     recomb_fams, mut_fams = extract_informative_subfamilies(family_graphs) # we are ignoring mut_fams!
+    from collections import Counter
+    c = Counter(f['ftype'] for f in recomb_fams)
+
+    logging.info(f'detected potential {c["typeI"]} type I families and {c["typeII"]} type II families')
+
     p = get_basic_arrays(recomb_fams[0]['mother'].shape[0])
     processed_families = []
     for fam in recomb_fams:
         try:
             processed_families.append(preprocess_family(fam, p['r'], p['inheritance_matrix']))
-        except AmbiguousPhasingError: # recoverable AmbiguousPhasingError have already been handled, here we discard the family
+        except FamilyNotInformativeError: # recoverable errors have already been handled, here we discard the family
             fid = fam['fid']
-            logging.warning(f'family {fid} was discarded because of ambiguous phasing!')
+            logging.warning(f'family {fid} was discarded since it is not informative!')
     return processed_families
 
 
