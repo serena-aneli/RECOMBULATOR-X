@@ -2,21 +2,9 @@ from .families import preprocess_families
 from .io import ped2graph
 from .estimate import estimate_rates
 
-def output_rates(estimated_rates, marker_names, estimate_mutation_rates, bootstrap=None):
-    if estimate_mutation_rates == 'no':
-        est_recomb_rates = estimated_rates
-    else:
-        est_recomb_rates, est_mut_rates = estimated_rates
-        if args.estimate_mutation_rates == 'one':
-            print('MUTATION', '*', est_mut_rates, sep='\t')
-        else:
-            for m, r in zip(marker_names, est_mut_rates):
-                print('MUTATION', m, r, sep='\t')
-
-    for i, r in enumerate(est_recomb_rates):
-        print('RECOMBINATION', marker_names[i] + '-' + marker_names[i + 1], r, sep='\t')
+def bootstrap_func(kwargs):
+    return estimate_rates(**kwargs)
  
-
 def main(
     default_mutation_rate = 0.001,
 ):
@@ -37,11 +25,11 @@ def main(
     )
     parser.add_argument(
         '--bootstrap', type=int, default=0,
-        help='number of bootstrap iterations, defaults to no bootstrap',
+        help='number of bootstrap iterations, defaults to no bootstrapping',
     )
     parser.add_argument(
-        '--bootstrap-output', type=str, 
-        help='save all bootstrap results to file',
+        '--bootstrap-threads', type=int, 
+        help='number of threads to use for bootstrapping, defaults to none',
     )
 
 
@@ -78,15 +66,38 @@ def main(
     log.info(f'Type I families (phased mother): {type_I}, type II families (unphased mother): {type_II}')
 
     if args.bootstrap:
+        log.info(f'Estimating rates with bootstrap...')
         import pandas
-        acc = []
-        n_markers = len(marker_names)
-        for n in range(args.bootstrap):
-            log.info(f'Estimating rates for bootstrap {n + 1}...')
-            sample = numpy.random.choice(processed_families, size=len(processed_families), replace=True)
-            recomb_start = numpy.square(numpy.random.random_sample(n_markers - 1)*0.49)
-            estimated_rates = estimate_rates(sample, recomb_start, starting_mutation_rates, estimate_mutation_rates=args.estimate_mutation_rates)
-            acc.append(estimated_rates)
+        try:
+            from tqdm import tqdm
+            def boot_track(it):
+                return tqdm(it, total=args.bootstrap)
+        except ModuleNotFoundError:
+            def boot_track(it):
+                for n, b in enumerate(it):
+                    log.info(f'Estimating rates for bootstrap {n + 1}...')
+                    yield b
+
+        if args.bootstrap_threads is not None:
+            from multiprocessing import Pool
+
+            arg_list = []
+            for n in range(args.bootstrap):
+                arg_list.append(dict(
+                    families=numpy.random.choice(processed_families, size=len(processed_families), replace=True),
+                    starting_recombination_rates=numpy.square(numpy.random.random_sample(len(marker_names) - 1)*0.49),
+                    starting_mutation_rates=starting_mutation_rates, estimate_mutation_rates=args.estimate_mutation_rates,
+                ))
+            with Pool(args.bootstrap_threads) as p:
+                acc = list(boot_track(p.imap_unordered(bootstrap_func, arg_list)))
+        else: # single thread boostrap
+            acc = []
+            for n in boot_track(range(args.bootstrap)):
+                #log.info(f'Estimating rates for bootstrap {n + 1}...')
+                sample = numpy.random.choice(processed_families, size=len(processed_families), replace=True)
+                recomb_start = numpy.square(numpy.random.random_sample(len(marker_names) - 1)*0.49)
+                estimated_rates = estimate_rates(sample, recomb_start, starting_mutation_rates, estimate_mutation_rates=args.estimate_mutation_rates)
+                acc.append(estimated_rates)
 
         index = ['BS-' + str(i + 1) for i in range(len(acc))]
         columns = ['RECOMB-' + a + '-' + b for a, b in zip(marker_names[:-1], marker_names[1:])]
