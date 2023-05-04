@@ -2,11 +2,25 @@ from .families import preprocess_families
 from .io import ped2graph
 from .estimate import estimate_rates
 
+def output_rates(estimated_rates, marker_names, estimate_mutation_rates, bootstrap=None):
+    if estimate_mutation_rates == 'no':
+        est_recomb_rates = estimated_rates
+    else:
+        est_recomb_rates, est_mut_rates = estimated_rates
+        if args.estimate_mutation_rates == 'one':
+            print('MUTATION', '*', est_mut_rates, sep='\t')
+        else:
+            for m, r in zip(marker_names, est_mut_rates):
+                print('MUTATION', m, r, sep='\t')
+
+    for i, r in enumerate(est_recomb_rates):
+        print('RECOMBINATION', marker_names[i] + '-' + marker_names[i + 1], r, sep='\t')
+ 
+
 def main(
     default_mutation_rate = 0.001,
 ):
     import argparse
-    import logging
 
     parser = argparse.ArgumentParser(description='Estimate recombination and mutation rates.')
     parser.add_argument(
@@ -21,12 +35,25 @@ def main(
         '--estimate-mutation-rates', default='no', choices=['no', 'one', 'all'],
         help='controls the estimation of the mutation rates. With "no" the mutation rates are not estimated, with "one" the same rate is estimated for all markers, with "all" a separate estimation rate is estimated for each marker. Defaults to  "no"'
     )
+    parser.add_argument(
+        '--bootstrap', type=int, default=0,
+        help='number of bootstrap iterations, defaults to no bootstrap',
+    )
+    parser.add_argument(
+        '--bootstrap-output', type=str, 
+        help='save all bootstrap results to file',
+    )
 
 
     args = parser.parse_args()
+
+    import numpy
+    import logging
+
     logging.basicConfig(level=logging.INFO)
     log = logging.getLogger('recombulator-x')
     #logging.basicConfig(filename='demo.log', level=logging.DEBUG)
+
     
     family_graphs, (marker_names, marker_types, marker_encoding) = ped2graph(args.ped_path)
     log.info(f'Read {len(family_graphs)} families with {len(marker_names)} markers from pedigree file.')
@@ -49,23 +76,53 @@ def main(
 
     log.info(f'Detected {len(processed_families)} informative families')
     log.info(f'Type I families (phased mother): {type_I}, type II families (unphased mother): {type_II}')
-    log.info(f'Estimating rates...')
-    estimated_rates = estimate_rates(processed_families, 0.1, starting_mutation_rates, estimate_mutation_rates=args.estimate_mutation_rates)
-    
-    print('TYPE', 'MARKER', 'RATE', sep='\t')
 
-    if args.estimate_mutation_rates == 'no':
-        est_recomb_rates = estimated_rates
-    else:
-        est_recomb_rates, est_mut_rates = estimated_rates
+    if args.bootstrap:
+        import pandas
+        acc = []
+        n_markers = len(marker_names)
+        for n in range(args.bootstrap):
+            log.info(f'Estimating rates for bootstrap {n + 1}...')
+            sample = numpy.random.choice(processed_families, size=len(processed_families), replace=True)
+            recomb_start = numpy.square(numpy.random.random_sample(n_markers - 1)*0.49)
+            estimated_rates = estimate_rates(sample, recomb_start, starting_mutation_rates, estimate_mutation_rates=args.estimate_mutation_rates)
+            acc.append(estimated_rates)
+
+        index = ['BS-' + str(i + 1) for i in range(len(acc))]
+        columns = ['RECOMB-' + a + '-' + b for a, b in zip(marker_names[:-1], marker_names[1:])]
         if args.estimate_mutation_rates == 'one':
-            print('MUTATION', '*', est_mut_rates, sep='\t')
-        else:
-            for m, r in zip(marker_names, est_mut_rates):
-                print('MUTATION', m, r, sep='\t')
+            acc = [numpy.append(recomb_rates, mut_rate) for recomb_rates, mut_rate in acc]
+            columns.append('MUTATION')
+        elif args.estimate_mutation_rates == 'all':
+            acc = [numpy.append(recomb_rates, mut_rates) for recomb_rates, mut_rates in acc]
+            columns += ['MUT-' + m for m in marker_names]
+        df = pandas.DataFrame(acc, index=index, columns=columns)
+        df.index.name = 'BOOTSTRAP'
+        df.loc['P02.5'] = df.quantile(0.025)
+        df.loc['P50.0'] = df.quantile(0.5)
+        df.loc['P97.5'] = df.quantile(0.975)
+        df.loc['MEAN'] = df.mean()
+        df.loc['STD'] = df.std()
+        print(df.to_csv(sep='\t'))
+    else:
+        log.info(f'Estimating rates...')
+        estimated_rates = estimate_rates(processed_families, 0.1, starting_mutation_rates, estimate_mutation_rates=args.estimate_mutation_rates)
+    
+        print('TYPE', 'MARKER', 'RATE', sep='\t')
 
-    for i, r in enumerate(est_recomb_rates):
-        print('RECOMBINATION', marker_names[i] + '-' + marker_names[i + 1], r, sep='\t')
+        if args.estimate_mutation_rates == 'no':
+            est_recomb_rates = estimated_rates
+        else:
+            est_recomb_rates, est_mut_rates = estimated_rates
+            if args.estimate_mutation_rates == 'one':
+                print('MUTATION', '*', est_mut_rates, sep='\t')
+            else:
+                for m, r in zip(marker_names, est_mut_rates):
+                    print('MUTATION', m, r, sep='\t')
+
+        for i, r in enumerate(est_recomb_rates):
+            print('RECOMBINATION', marker_names[i] + '-' + marker_names[i + 1], r, sep='\t')
+
     log.info('DONE')
 
 if __name__ == '__main__':
