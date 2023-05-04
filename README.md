@@ -62,6 +62,7 @@ We developed recombulator-x to overcome this issue. Built upon the same statisti
 - Accelerated likelihood computation with the JIT Python compiler Numba
 - Mutation rates can be estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STRs
+- Optional bootstrapping available
 
 ## :rocket: Benchmark
 
