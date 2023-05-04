@@ -18,7 +18,7 @@ recombulator-x is a Python module and command line tool for computing the recomb
 <br/>
 <br/>
 
-recombulator-x is written in Python (3.6) and can be used either as a module or as a command-line tool. 
+Recombulator-x is written in Python (3.6) and can be used either as a module or as a command-line tool. 
 It is the first open source implementation of the estimation method introduced in [Nothnagel et al., 2012](https://www.sciencedirect.com/science/article/pii/S1872497312000713?via%3Dihub), which is the gold-standard for the estimation of recombination rates for X-chromosomal markers. We designed recombulator-x to solve some practical issues with the original R implementation. Its main advantages are:
 
 * performance: much faster than the original implementation, thanks to algorithmic improvements (dynamic programming)
@@ -58,6 +58,7 @@ We developed recombulator-x to overcome this issue. Built upon the same statisti
 - Accelerated likelihood computation with the JIT Python compiler Numba
 - Mutation rates can be estimated for each marker separately or as a unique parameter 
 - Simulation of pedigrees typed with STR
+- Optional bootstrapping available
 
 ## :rocket: Benchmark
 
