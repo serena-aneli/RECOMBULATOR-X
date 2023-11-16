@@ -13,7 +13,7 @@ recombulator-x is a Python module and command line tool for computing the recomb
 
 :octocat: [GitHub repository](https://github.com/serena-aneli/recombulator-x)
 
-:page_facing_up: Please cite [Paper](https://www.biorxiv.org/content/10.1101/2023.03.31.535050v1)
+:page_facing_up: Please cite [Paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011474)
 
 <br/>
 <br/>
